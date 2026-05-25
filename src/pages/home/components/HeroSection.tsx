@@ -55,7 +55,7 @@ export default function HeroSection() {
             </p>
 
             <p className="mb-7 text-[14px] font-bold leading-[1.9] text-gray-900 md:mb-9 md:text-base">
-              弊社が取り扱う法人・個人事業主様向けサービスをご契約のお客様は、
+              弊社取り扱いの対象サービスをご契約のお客様は、
               <br />
               初期費用・月額費用・サーバー費用すべて0円。
               <br />
