@@ -123,11 +123,6 @@ export default function PricingSection() {
             font-size: 17px;
             font-weight: 900;
             line-height: 1.4;
-            text-decoration-line: underline;
-            text-decoration-color: rgba(255, 196, 0, 0.32);
-            text-decoration-thickness: 0.28em;
-            text-underline-offset: -0.1em;
-            text-decoration-skip-ink: none;
           }
 
           .pricing-price {
