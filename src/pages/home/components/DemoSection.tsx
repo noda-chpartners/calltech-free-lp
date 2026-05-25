@@ -1,96 +1,323 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { demoSites } from '@/mocks/demoSites';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 export default function DemoSection() {
   const { ref, isVisible } = useScrollReveal();
+  const trackRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const scrollToCard = (index: number) => {
+    const track = trackRef.current;
+    const target = track?.querySelector<HTMLElement>(`[data-demo-index="${index}"]`);
+    if (!track || !target) return;
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % demoSites.length);
+    target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    setCurrentIndex(index);
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + demoSites.length) % demoSites.length);
+  const moveSlide = (direction: -1 | 1) => {
+    const nextIndex = (currentIndex + direction + demoSites.length) % demoSites.length;
+    scrollToCard(nextIndex);
   };
-
-  const itemWidth = isMobile ? 100 : 25;
 
   return (
-    <section id="demo" ref={ref} className={`w-full py-16 md:py-24 bg-white transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-      <div className="w-full px-4 md:px-8 lg:px-12">
-        <h3 className="text-xl md:text-2xl font-bold text-center text-gray-900 mb-10 md:mb-14">
-          デモサイト
-        </h3>
+    <section
+      id="demo"
+      ref={ref}
+      className={`demo-section transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
+      <style>
+        {`
+          .demo-section {
+            width: 100%;
+            padding: 64px 20px 72px;
+            background: #fff;
+          }
 
-        <div className="relative max-w-6xl mx-auto">
-          {/* Navigation Arrows */}
+          .demo-inner {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+          }
+
+          .demo-heading {
+            margin: 0 0 34px;
+            color: #0f172a;
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1.45;
+            text-align: center;
+            letter-spacing: 0.03em;
+          }
+
+          .demo-carousel {
+            position: relative;
+          }
+
+          .demo-track-wrap {
+            overflow: visible;
+          }
+
+          .demo-track {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 28px;
+          }
+
+          .demo-card {
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+            transition: transform 180ms ease, box-shadow 180ms ease;
+          }
+
+          .demo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
+          }
+
+          .demo-image-frame {
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #f8fafc;
+          }
+
+          .demo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+          }
+
+          .demo-card-body {
+            padding: 14px 16px 16px;
+          }
+
+          .demo-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 58px;
+            min-height: 24px;
+            margin-bottom: 10px;
+            padding: 4px 10px;
+            color: #fff;
+            background: #0068b7;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 900;
+            line-height: 1;
+          }
+
+          .demo-card:nth-child(2) .demo-tag {
+            background: #38aeea;
+          }
+
+          .demo-card:nth-child(3) .demo-tag {
+            background: #74b958;
+          }
+
+          .demo-card:nth-child(4) .demo-tag {
+            background: #7c6ad6;
+          }
+
+          .demo-title {
+            margin: 0 0 14px;
+            color: #111827;
+            font-size: 15px;
+            font-weight: 900;
+            line-height: 1.4;
+          }
+
+          .demo-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 34px;
+            color: #111827;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.34);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            text-decoration: none;
+            transition: background 180ms ease, border-color 180ms ease;
+          }
+
+          .demo-button:hover {
+            background: #f8fafc;
+            border-color: #0068b7;
+          }
+
+          .demo-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            color: #0068b7;
+            background: #fff;
+            border: 1px solid rgba(0, 104, 183, 0.16);
+            border-radius: 999px;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+            transform: translateY(-50%);
+            cursor: pointer;
+          }
+
+          .demo-arrow-left {
+            left: -56px;
+          }
+
+          .demo-arrow-right {
+            right: -56px;
+          }
+
+          .demo-arrow i {
+            font-size: 22px;
+            line-height: 1;
+          }
+
+          .demo-dots {
+            display: flex;
+            justify-content: center;
+            gap: 9px;
+            margin-top: 24px;
+          }
+
+          .demo-dot {
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            background: #d7dde6;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+          }
+
+          .demo-dot.is-active {
+            background: #ffc400;
+          }
+
+          @media (max-width: 1299px) {
+            .demo-arrow-left {
+              left: -14px;
+            }
+
+            .demo-arrow-right {
+              right: -14px;
+            }
+          }
+
+          @media (max-width: 767px) {
+            .demo-section {
+              padding: 54px 20px 62px;
+            }
+
+            .demo-heading {
+              margin-bottom: 26px;
+              font-size: 24px;
+            }
+
+            .demo-track-wrap {
+              overflow-x: auto;
+              margin: 0 -20px;
+              padding: 0 20px 8px;
+              scroll-snap-type: x mandatory;
+              scrollbar-width: none;
+            }
+
+            .demo-track-wrap::-webkit-scrollbar {
+              display: none;
+            }
+
+            .demo-track {
+              display: flex;
+              gap: 18px;
+            }
+
+            .demo-card {
+              flex: 0 0 min(82vw, 320px);
+              scroll-snap-align: start;
+            }
+
+            .demo-arrow {
+              top: 42%;
+              width: 38px;
+              height: 38px;
+            }
+
+            .demo-arrow-left {
+              left: -4px;
+            }
+
+            .demo-arrow-right {
+              right: -4px;
+            }
+          }
+        `}
+      </style>
+
+      <div className="demo-inner">
+        <h3 className="demo-heading">デモサイト</h3>
+
+        <div className="demo-carousel">
           <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+            type="button"
+            className="demo-arrow demo-arrow-left"
+            onClick={() => moveSlide(-1)}
+            aria-label="前のデモサイトを見る"
           >
-            <i className="ri-arrow-left-s-line text-xl text-gray-600 w-6 h-6 flex items-center justify-center" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-shadow cursor-pointer"
-          >
-            <i className="ri-arrow-right-s-line text-xl text-gray-600 w-6 h-6 flex items-center justify-center" />
+            <i className="ri-arrow-left-s-line" aria-hidden="true" />
           </button>
 
-          {/* Cards Container */}
-          <div className="overflow-hidden px-8 md:px-12">
-            <div
-              className="flex transition-transform duration-500 ease-in-out gap-4 md:gap-6"
-              style={{ transform: `translateX(-${currentIndex * itemWidth}%)` }}
-            >
-              {demoSites.map((site) => (
-                <div
-                  key={site.id}
-                  className="min-w-[calc(100%-0px)] md:min-w-[calc(25%-18px)] flex-shrink-0 bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="w-full aspect-[3/2] overflow-hidden">
-                    <img
-                      src={site.image}
-                      alt={site.name}
-                      className="w-full h-full object-cover object-top"
-                    />
+          <div className="demo-track-wrap">
+            <div ref={trackRef} className="demo-track">
+              {demoSites.map((site, index) => (
+                <article key={site.id} className="demo-card" data-demo-index={index}>
+                  <div className="demo-image-frame">
+                    <img src={site.image} alt={site.name} className="demo-image" />
                   </div>
-                  <div className="p-4">
-                    <div className="inline-block px-2 py-0.5 bg-brand-blue text-white text-xs font-bold rounded mb-2">
-                      {site.category}
-                    </div>
-                    <p className="text-sm font-bold text-gray-900 mb-3">{site.name}</p>
-                    <a
-                      href={site.link}
-                      className="inline-flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap cursor-pointer"
-                    >
+                  <div className="demo-card-body">
+                    <span className="demo-tag">{site.category}</span>
+                    <h4 className="demo-title">{site.name}</h4>
+                    <a href={site.link} className="demo-button">
                       デモを見る
                     </a>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
 
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-8">
-            {demoSites.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors cursor-pointer ${i === currentIndex ? 'bg-brand-yellow' : 'bg-gray-300'}`}
-              />
-            ))}
-          </div>
+          <button
+            type="button"
+            className="demo-arrow demo-arrow-right"
+            onClick={() => moveSlide(1)}
+            aria-label="次のデモサイトを見る"
+          >
+            <i className="ri-arrow-right-s-line" aria-hidden="true" />
+          </button>
+        </div>
+
+        <div className="demo-dots" aria-hidden="true">
+          {demoSites.map((site, index) => (
+            <button
+              key={site.id}
+              type="button"
+              className={`demo-dot ${index === currentIndex ? 'is-active' : ''}`}
+              onClick={() => scrollToCard(index)}
+              tabIndex={-1}
+            />
+          ))}
         </div>
       </div>
     </section>

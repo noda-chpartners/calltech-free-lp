@@ -16,7 +16,7 @@ export const demoSites: DemoSite[] = [
   },
   {
     id: 2,
-    category: '美容室',
+    category: '美容サロン',
     name: 'ヘアサロン',
     image: 'https://readdy.ai/api/search-image?query=A%20modern%20Japanese%20hair%20salon%20website%20screenshot%20mockup%20featuring%20a%20clean%20bright%20interior%20with%20white%20walls%20and%20green%20plants%20stylish%20minimalist%20web%20design%20showing%20salon%20services%20professional%20beauty%20business%20aesthetic%20with%20soft%20pastel%20colors%20and%20elegant%20typography&width=600&height=400&seq=3&orientation=landscape',
     link: '#',
@@ -25,7 +25,7 @@ export const demoSites: DemoSite[] = [
     id: 3,
     category: '整体院',
     name: '整体・整骨院',
-    image: 'https://readdy.ai/api/search-image?query=A%20professional%20Japanese%20osteopathic%20clinic%20website%20screenshot%20mockup%20showing%20a%20therapist%20hands%20performing%20body%20treatment%20on%20a%20patient%20clean%20medical%20wellness%20design%20with%20calming%20green%20and%20white%20colors%20trustworthy%20healthcare%20web%20interface%20minimal%20layout&width=600&height=400&seq=4&orientation=landscape',
+    image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80',
     link: '#',
   },
   {
