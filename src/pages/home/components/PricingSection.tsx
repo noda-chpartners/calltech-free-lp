@@ -1,52 +1,235 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
+const items = [
+  {
+    icon: 'ri-computer-line',
+    title: '制作費',
+    description: 'デザイン制作からコーディングまで\nすべて0円でご提供します。',
+  },
+  {
+    icon: 'ri-calendar-line',
+    title: '月額費用',
+    description: '月額利用料は一切かかりません。\n維持費の心配なく運用いただけます。',
+  },
+  {
+    icon: 'ri-server-line',
+    title: 'サーバー費用',
+    description: 'サーバー費用も0円。\n安全・安定した環境で運用できます。\n※対応範囲内の場合',
+  },
+];
+
 export default function PricingSection() {
   const { ref, isVisible } = useScrollReveal();
 
-  const items = [
-    {
-      icon: 'ri-computer-line',
-      title: '制作費',
-      price: '0',
-      desc: 'デザイン制作からコーディングまで\nすべて0円でご提供します。',
-    },
-    {
-      icon: 'ri-calendar-line',
-      title: '月額費用',
-      price: '0',
-      desc: '月額利用料は一切かかりません。\n維持費の心配なくご活用いただけます。',
-    },
-    {
-      icon: 'ri-server-line',
-      title: 'サーバー費用',
-      price: '0',
-      desc: 'サーバー費用も0円。\n安全・安定した環境で運用できます。\n※対応範囲内の場合',
-    },
-  ];
-
   return (
-    <section ref={ref} className={`w-full py-16 md:py-24 bg-white transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-      <div className="w-full px-4 md:px-8 lg:px-12">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12 md:mb-16">
-          ホームページ制作にかかる費用を、まとめて<span className="text-brand-yellow text-4xl md:text-5xl font-black mx-1">0</span>円に
+    <section
+      ref={ref}
+      className={`pricing-section w-full bg-white transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
+      <style>
+        {`
+          .pricing-section {
+            padding: 56px 20px 64px;
+          }
+
+          .pricing-inner {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+          }
+
+          .pricing-heading {
+            margin: 0 0 42px;
+            color: #0f172a;
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 1.55;
+            letter-spacing: 0.02em;
+            text-align: center;
+          }
+
+          .pricing-heading-zero {
+            margin: 0 4px;
+            color: #ffc400;
+            font-size: 50px;
+            line-height: 1;
+            vertical-align: -0.06em;
+          }
+
+          .pricing-card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+          }
+
+          .pricing-card {
+            min-height: 178px;
+            padding: 34px 34px 30px;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            border-radius: 24px;
+            box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+          }
+
+          .pricing-card-body {
+            display: flex;
+            align-items: flex-start;
+            gap: 26px;
+          }
+
+          .pricing-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 72px;
+            width: 72px;
+            height: 72px;
+            color: #ffc400;
+            background: #fff8dd;
+            border-radius: 18px;
+          }
+
+          .pricing-icon i {
+            font-size: 44px;
+            line-height: 1;
+          }
+
+          .pricing-content {
+            flex: 1;
+            min-width: 0;
+          }
+
+          .pricing-title-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 10px;
+          }
+
+          .pricing-title {
+            margin: 7px 0 0;
+            color: #0f172a;
+            font-size: 17px;
+            font-weight: 900;
+            line-height: 1.4;
+          }
+
+          .pricing-price {
+            display: flex;
+            align-items: baseline;
+            flex: 0 0 auto;
+            margin: 0;
+            color: #0068b7;
+          }
+
+          .pricing-price-number {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+          }
+
+          .pricing-price-unit {
+            margin-left: 4px;
+            font-size: 22px;
+            font-weight: 900;
+          }
+
+          .pricing-description {
+            margin: 20px 0 0;
+            color: #1f2937;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.9;
+            text-align: center;
+            white-space: pre-line;
+          }
+
+          @media (max-width: 1023px) {
+            .pricing-card-grid {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+          }
+
+          @media (max-width: 767px) {
+            .pricing-section {
+              padding: 48px 20px 56px;
+            }
+
+            .pricing-heading {
+              margin-bottom: 30px;
+              font-size: 24px;
+            }
+
+            .pricing-heading-zero {
+              font-size: 42px;
+            }
+
+            .pricing-card-grid {
+              grid-template-columns: 1fr;
+              gap: 18px;
+            }
+
+            .pricing-card {
+              padding: 28px 24px;
+            }
+
+            .pricing-card-body {
+              gap: 18px;
+            }
+
+            .pricing-icon {
+              flex-basis: 58px;
+              width: 58px;
+              height: 58px;
+              border-radius: 16px;
+            }
+
+            .pricing-icon i {
+              font-size: 34px;
+            }
+
+            .pricing-title-row {
+              gap: 12px;
+            }
+
+            .pricing-price-number {
+              font-size: 54px;
+            }
+          }
+        `}
+      </style>
+
+      <div className="pricing-inner">
+        <h2 className="pricing-heading">
+          ホームページ制作にかかる費用を、まとめて
+          <span className="pricing-heading-zero">0</span>
+          円に
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
-          {items.map((item, index) => (
-            <div key={index} className="flex flex-col items-center text-center p-6">
-              <div className="w-16 h-16 flex items-center justify-center mb-4">
-                <i className={`${item.icon} text-4xl text-brand-yellow w-10 h-10 flex items-center justify-center`} />
+
+        <div className="pricing-card-grid">
+          {items.map((item) => (
+            <article key={item.title} className="pricing-card">
+              <div className="pricing-card-body">
+                <div className="pricing-icon">
+                  <i className={item.icon} aria-hidden="true" />
+                </div>
+
+                <div className="pricing-content">
+                  <div className="pricing-title-row">
+                    <h3 className="pricing-title">{item.title}</h3>
+                    <p className="pricing-price">
+                      <span className="pricing-price-number">0</span>
+                      <span className="pricing-price-unit">円</span>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-baseline gap-1 mb-3">
-                <span className="text-sm font-medium text-gray-700">{item.title}</span>
-              </div>
-              <div className="flex items-baseline gap-0.5 mb-4">
-                <span className="text-5xl md:text-6xl font-black text-brand-yellow">{item.price}</span>
-                <span className="text-xl font-bold text-gray-900">円</span>
-              </div>
-              <p className="text-xs md:text-sm text-gray-500 leading-relaxed whitespace-pre-line">
-                {item.desc}
-              </p>
-            </div>
+              <p className="pricing-description">{item.description}</p>
+            </article>
           ))}
         </div>
       </div>

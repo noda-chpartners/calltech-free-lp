@@ -1,73 +1,238 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
+const features = [
+  { icon: 'ri-smartphone-line', label: 'レスポンシブ対応' },
+  { icon: 'ri-palette-line', label: 'オリジナルデザイン' },
+  { icon: 'ri-search-line', label: '基本SEO設定' },
+  { icon: 'ri-mail-send-line', label: 'お問い合わせ導線' },
+  { icon: 'ri-map-pin-line', label: 'Googleマップ連携' },
+  { icon: 'ri-lock-line', label: 'SSL対応' },
+];
+
+const recommendations = [
+  'ホームページを持っていない、これから作りたい',
+  'コストを抑えてWebで集客を始めたい',
+  '名刺やチラシだけでは情報が伝えきれない',
+  '店舗情報やサービス内容をWeb上でわかりやすく伝えたい',
+];
+
 export default function ServicesSection() {
   const { ref, isVisible } = useScrollReveal();
 
-  const features = [
-    { icon: 'ri-smartphone-line', label: 'レスポンシブ対応' },
-    { icon: 'ri-palette-line', label: 'オリジナルデザイン' },
-    { icon: 'ri-search-line', label: '基本SEO設定' },
-    { icon: 'ri-mail-line', label: 'お問い合わせ機能' },
-    { icon: 'ri-map-pin-line', label: 'Googleマップ連携' },
-    { icon: 'ri-lock-line', label: 'SSL対応' },
-  ];
-
-  const recommendations = [
-    'ホームページを持っていない、これから作りたい',
-    'コストを抑えてWebで集客を始めたい',
-    '名刺やチラシだけでは情報を伝えきれない',
-    '店舗情報やサービス内容をWeb上でわかりやすく伝えたい',
-  ];
-
   return (
-    <section id="services" ref={ref} className={`w-full py-16 md:py-24 bg-gray-50 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-      <div className="w-full px-4 md:px-8 lg:px-12">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 max-w-5xl mx-auto">
-          {/* Left: Services */}
-          <div className="flex-1">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-8">
-              サービスに含まれる内容
-            </h3>
-            <div className="grid grid-cols-2 gap-4 md:gap-6">
-              {features.map((f, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white shadow-sm flex-shrink-0">
-                    <i className={`${f.icon} text-lg text-brand-blue w-5 h-5 flex items-center justify-center`} />
-                  </div>
-                  <span className="text-sm md:text-base font-medium text-gray-700 pt-2">{f.label}</span>
-                </div>
-              ))}
-            </div>
-            <a href="#" className="inline-flex items-center gap-1 mt-8 text-sm font-medium text-brand-blue hover:underline cursor-pointer">
-              機能の詳細を見る <i className="ri-arrow-right-s-line w-4 h-4 flex items-center justify-center" />
-            </a>
+    <section
+      id="services"
+      ref={ref}
+      className={`services-section transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
+      <style>
+        {`
+          .services-section {
+            width: 100%;
+            padding: 68px 20px 76px;
+            background: #fff;
+          }
+
+          .services-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+            gap: 64px;
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            align-items: start;
+          }
+
+          .services-panel,
+          .recommend-panel {
+            min-width: 0;
+          }
+
+          .services-title {
+            margin: 0 0 22px;
+            color: #0f172a;
+            font-size: 24px;
+            font-weight: 900;
+            line-height: 1.45;
+            letter-spacing: 0.02em;
+          }
+
+          .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            border-radius: 14px;
+            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
+          }
+
+          .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-height: 82px;
+            padding: 20px 22px;
+            border-right: 1px solid rgba(15, 23, 42, 0.08);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+          }
+
+          .feature-item:nth-child(3n) {
+            border-right: 0;
+          }
+
+          .feature-item:nth-child(n + 4) {
+            border-bottom: 0;
+          }
+
+          .feature-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 34px;
+            width: 34px;
+            height: 34px;
+            color: #0068b7;
+          }
+
+          .feature-icon i {
+            font-size: 30px;
+            line-height: 1;
+          }
+
+          .feature-label {
+            color: #111827;
+            font-size: 13px;
+            font-weight: 800;
+            line-height: 1.5;
+          }
+
+          .services-detail-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            color: #0068b7;
+            font-size: 14px;
+            font-weight: 900;
+            text-decoration: none;
+          }
+
+          .recommend-list {
+            display: grid;
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+          }
+
+          .recommend-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            color: #111827;
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.75;
+          }
+
+          .recommend-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 22px;
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+            color: #fff;
+            background: #0068b7;
+            border-radius: 999px;
+            box-shadow: 0 6px 14px rgba(0, 104, 183, 0.18);
+          }
+
+          .recommend-check i {
+            font-size: 14px;
+            line-height: 1;
+          }
+
+          @media (max-width: 1023px) {
+            .services-inner {
+              grid-template-columns: 1fr;
+              gap: 42px;
+            }
+          }
+
+          @media (max-width: 767px) {
+            .services-section {
+              padding: 54px 20px 62px;
+            }
+
+            .services-title {
+              margin-bottom: 18px;
+              font-size: 22px;
+            }
+
+            .feature-grid {
+              grid-template-columns: 1fr;
+              border-radius: 18px;
+            }
+
+            .feature-item {
+              min-height: 72px;
+              border-right: 0;
+              border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            }
+
+            .feature-item:nth-child(n + 4) {
+              border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            }
+
+            .feature-item:last-child {
+              border-bottom: 0;
+            }
+
+            .recommend-list {
+              gap: 16px;
+            }
+          }
+        `}
+      </style>
+
+      <div className="services-inner">
+        <div className="services-panel">
+          <h3 className="services-title">サービスに含まれる内容</h3>
+          <div className="feature-grid">
+            {features.map((feature) => (
+              <div key={feature.label} className="feature-item">
+                <span className="feature-icon" aria-hidden="true">
+                  <i className={feature.icon} />
+                </span>
+                <span className="feature-label">{feature.label}</span>
+              </div>
+            ))}
           </div>
 
-          {/* Right: Recommendations */}
-          <div className="flex-1">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-8">
-              こんな方におすすめ
-            </h3>
-            <ul className="space-y-4 mb-8">
-              {recommendations.map((rec, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-brand-yellow flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i className="ri-check-line text-white text-xs w-3 h-3 flex items-center justify-center" />
-                  </div>
-                  <span className="text-sm md:text-base text-gray-700">{rec}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="w-full max-w-[280px] mx-auto lg:mx-0">
-              <div className="w-full aspect-[4/5] rounded-lg overflow-hidden">
-                <img
-                  src="https://readdy.ai/api/search-image?query=A%20friendly%20young%20Asian%20couple%20illustration%20wearing%20shop%20aprons%20standing%20together%20simple%20flat%20cartoon%20anime%20style%20character%20design%20warm%20orange%20and%20yellow%20color%20palette%20cheerful%20welcoming%20expressions%20clean%20white%20background%20professional%20business%20service%20mascot%20illustration&width=400&height=500&seq=6&orientation=portrait"
-                  alt="店舗経営者のイラスト"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-            </div>
-          </div>
+          <a href="#" className="services-detail-link">
+            機能の詳細を見る
+            <i className="ri-arrow-right-s-line text-lg leading-none" aria-hidden="true" />
+          </a>
+        </div>
+
+        <div className="recommend-panel">
+          <h3 className="services-title">こんな方におすすめ</h3>
+          <ul className="recommend-list">
+            {recommendations.map((recommendation) => (
+              <li key={recommendation} className="recommend-item">
+                <span className="recommend-check" aria-hidden="true">
+                  <i className="ri-check-line" />
+                </span>
+                <span>{recommendation}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
