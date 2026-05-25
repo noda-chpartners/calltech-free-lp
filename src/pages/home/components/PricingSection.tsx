@@ -48,11 +48,6 @@ export default function PricingSection() {
             line-height: 1.55;
             letter-spacing: 0.02em;
             text-align: center;
-            text-decoration-line: underline;
-            text-decoration-color: rgba(255, 196, 0, 0.34);
-            text-decoration-thickness: 0.28em;
-            text-underline-offset: -0.12em;
-            text-decoration-skip-ink: none;
           }
 
           .pricing-heading-zero {
