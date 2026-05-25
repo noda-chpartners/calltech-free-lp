@@ -54,12 +54,14 @@ export default function HeroSection() {
               はじめやすいホームページ制作を。
             </p>
 
-            <p className="mb-7 text-[14px] font-bold leading-[1.85] text-gray-900 md:mb-9 md:text-base">
+            <p className="mb-7 text-[14px] font-bold leading-[1.9] text-gray-900 md:mb-9 md:text-base">
+              弊社が取り扱う法人・個人事業主様向けサービスをご契約のお客様は、
+              <br />
               初期費用・月額費用・サーバー費用すべて0円。
               <br />
               必要な機能をそろえたホームページを、
               <br />
-              無料でご提供します。（対応範囲内の場合）
+              無料でご提供します。
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
