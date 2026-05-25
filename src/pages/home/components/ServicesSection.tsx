@@ -57,6 +57,11 @@ export default function ServicesSection() {
             font-weight: 900;
             line-height: 1.45;
             letter-spacing: 0.02em;
+            text-decoration-line: underline;
+            text-decoration-color: rgba(0, 104, 183, 0.26);
+            text-decoration-thickness: 0.28em;
+            text-underline-offset: -0.1em;
+            text-decoration-skip-ink: none;
           }
 
           .feature-grid {
@@ -67,7 +72,9 @@ export default function ServicesSection() {
             background: #fff;
             border: 1px solid rgba(15, 23, 42, 0.12);
             border-radius: 14px;
-            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
+            box-shadow:
+              0 20px 44px rgba(15, 23, 42, 0.1),
+              0 4px 12px rgba(15, 23, 42, 0.05);
           }
 
           .feature-item {
@@ -150,7 +157,7 @@ export default function ServicesSection() {
             color: #fff;
             background: #0068b7;
             border-radius: 999px;
-            box-shadow: 0 6px 14px rgba(0, 104, 183, 0.18);
+            box-shadow: 0 9px 18px rgba(0, 104, 183, 0.28);
           }
 
           .recommend-check i {

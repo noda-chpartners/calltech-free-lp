@@ -48,6 +48,11 @@ export default function PricingSection() {
             line-height: 1.55;
             letter-spacing: 0.02em;
             text-align: center;
+            text-decoration-line: underline;
+            text-decoration-color: rgba(255, 196, 0, 0.34);
+            text-decoration-thickness: 0.28em;
+            text-underline-offset: -0.12em;
+            text-decoration-skip-ink: none;
           }
 
           .pricing-heading-zero {
@@ -68,9 +73,11 @@ export default function PricingSection() {
             min-height: 178px;
             padding: 34px 34px 30px;
             background: #fff;
-            border: 1px solid rgba(15, 23, 42, 0.06);
+            border: 1px solid rgba(15, 23, 42, 0.08);
             border-radius: 24px;
-            box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+            box-shadow:
+              0 22px 54px rgba(15, 23, 42, 0.12),
+              0 4px 12px rgba(15, 23, 42, 0.06);
           }
 
           .pricing-card-body {
@@ -89,6 +96,7 @@ export default function PricingSection() {
             color: #ffc400;
             background: #fff8dd;
             border-radius: 18px;
+            box-shadow: inset 0 -2px 0 rgba(255, 196, 0, 0.16), 0 10px 22px rgba(180, 122, 0, 0.1);
           }
 
           .pricing-icon i {
@@ -115,6 +123,11 @@ export default function PricingSection() {
             font-size: 17px;
             font-weight: 900;
             line-height: 1.4;
+            text-decoration-line: underline;
+            text-decoration-color: rgba(255, 196, 0, 0.32);
+            text-decoration-thickness: 0.28em;
+            text-underline-offset: -0.1em;
+            text-decoration-skip-ink: none;
           }
 
           .pricing-price {

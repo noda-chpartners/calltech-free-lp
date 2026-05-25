@@ -1,68 +1,233 @@
+const navItems = ['COMPANY', 'SERVICE', 'NEWS', 'RECRUIT', 'CONTACT', 'PRIVACYPOLICY', 'PRIVACYMARK'];
+
 export default function Footer() {
   return (
-    <footer className="w-full bg-brand-dark text-white">
-      <div className="w-full px-4 md:px-8 lg:px-12 py-12 md:py-16">
-        <div className="flex flex-col md:flex-row gap-10 md:gap-16 max-w-6xl mx-auto">
-          {/* Left: Logo & Info */}
-          <div className="md:w-1/3">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center">
-                <div className="w-3 h-3 rounded-full bg-white" />
-              </div>
-              <span className="text-xl font-bold">Calitech</span>
-            </div>
-            <p className="text-xs text-gray-400 mb-6 leading-relaxed">
-              株式会社Calitechは、コワーキングカフェからテクノロジーで実現する新たな働き方を提供しています。
-            </p>
-            <div className="space-y-1 text-xs text-gray-400">
-              <p className="font-bold text-white">株式会社Calitech</p>
-              <p>〒170-0013</p>
-              <p>東京都豊島区東池袋1-27-8 池袋ビル10階</p>
-              <p>03-6384-7760</p>
-            </div>
-            <div className="flex items-center gap-4 mt-6">
-              <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer">
-                <i className="ri-pinterest-fill text-sm w-4 h-4 flex items-center justify-center" />
-              </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer">
-                <i className="ri-instagram-fill text-sm w-4 h-4 flex items-center justify-center" />
-              </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer">
-                <i className="ri-facebook-fill text-sm w-4 h-4 flex items-center justify-center" />
-              </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer">
-                <i className="ri-twitter-x-fill text-sm w-4 h-4 flex items-center justify-center" />
-              </a>
-            </div>
-          </div>
+    <footer className="footer-section">
+      <style>
+        {`
+          .footer-section {
+            width: 100%;
+            color: #fff;
+            background:
+              radial-gradient(circle at 16% 0%, rgba(255, 255, 255, 0.08), transparent 30%),
+              linear-gradient(135deg, #2f3333 0%, #202322 100%);
+            box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.08);
+          }
 
-          {/* Right: Links */}
-          <div className="md:w-2/3">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-              <div>
-                <h4 className="text-sm font-bold mb-4 text-gray-300">COMPANY</h4>
-                <ul className="space-y-2 text-xs text-gray-400">
-                  <li><a href="#" className="hover:text-white transition-colors cursor-pointer">SERVICE</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors cursor-pointer">NEWS</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors cursor-pointer">RECRUIT</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors cursor-pointer">CONTACT</a></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-sm font-bold mb-4 text-gray-300">PRIVACYPOLICY</h4>
-                <ul className="space-y-2 text-xs text-gray-400">
-                  <li><a href="#" className="hover:text-white transition-colors cursor-pointer">PRIVACYMARK</a></li>
-                </ul>
-              </div>
-            </div>
+          .footer-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.65fr);
+            gap: 88px;
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 46px 20px 30px;
+          }
+
+          .footer-logo {
+            display: block;
+            width: 178px;
+            height: auto;
+            margin-bottom: 18px;
+          }
+
+          .footer-description {
+            margin: 0 0 22px;
+            max-width: 360px;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.85;
+          }
+
+          .footer-company {
+            display: grid;
+            gap: 4px;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1.65;
+          }
+
+          .footer-company-name {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 900;
+          }
+
+          .footer-social {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 24px;
+          }
+
+          .footer-privacy-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            color: rgba(255, 255, 255, 0.88);
+            border: 2px solid rgba(255, 255, 255, 0.72);
+            border-radius: 999px;
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+          }
+
+          .footer-social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 180ms ease;
+          }
+
+          .footer-social-link:hover {
+            opacity: 0.72;
+          }
+
+          .footer-social-link i {
+            font-size: 31px;
+            line-height: 1;
+          }
+
+          .footer-nav {
+            align-self: start;
+            padding-top: 6px;
+          }
+
+          .footer-nav-list {
+            display: grid;
+            gap: 13px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+          }
+
+          .footer-nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            text-decoration: none;
+            transition: color 180ms ease;
+          }
+
+          .footer-nav-link:hover {
+            color: #ffc400;
+          }
+
+          .footer-copyright {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 20px 18px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.6;
+            text-align: center;
+          }
+
+          @media (max-width: 767px) {
+            .footer-inner {
+              grid-template-columns: 1fr;
+              gap: 38px;
+              padding: 42px 20px 26px;
+            }
+
+            .footer-logo {
+              width: 164px;
+              margin-bottom: 20px;
+            }
+
+            .footer-description {
+              margin-bottom: 24px;
+              line-height: 1.9;
+            }
+
+            .footer-company {
+              gap: 6px;
+              line-height: 1.75;
+            }
+
+            .footer-social {
+              gap: 18px;
+              margin-top: 26px;
+            }
+
+            .footer-nav {
+              padding-top: 0;
+            }
+
+            .footer-nav-list {
+              gap: 16px;
+            }
+
+            .footer-nav-link {
+              line-height: 1.35;
+            }
+
+            .footer-copyright {
+              padding-bottom: 22px;
+            }
+          }
+        `}
+      </style>
+
+      <div className="footer-inner">
+        <div>
+          <img src="/images/calltech-logo-white.png" alt="Calltech" className="footer-logo" />
+          <p className="footer-description">
+            株式会社Calltechは、コールセンターから
+            <br />
+            テクノロジーと笑顔を届ける会社です。
+          </p>
+
+          <address className="footer-company">
+            <span className="footer-company-name">株式会社Calltech</span>
+            <span>〒170-0013</span>
+            <span>東京都豊島区東池袋1-27-8　池袋原ビル10階</span>
+            <span>03-6384-7760</span>
+          </address>
+
+          <div className="footer-social" aria-label="SNSとプライバシーマーク">
+            <span className="footer-privacy-mark" aria-label="プライバシーマーク">
+              P
+            </span>
+            <a href="#" className="footer-social-link" aria-label="Instagram">
+              <i className="ri-instagram-line" aria-hidden="true" />
+            </a>
+            <a href="#" className="footer-social-link" aria-label="Facebook">
+              <i className="ri-facebook-fill" aria-hidden="true" />
+            </a>
+            <a href="#" className="footer-social-link" aria-label="X">
+              <i className="ri-twitter-x-line" aria-hidden="true" />
+            </a>
           </div>
         </div>
+
+        <nav className="footer-nav" aria-label="フッターナビゲーション">
+          <ul className="footer-nav-list">
+            {navItems.map((item) => (
+              <li key={item}>
+                <a href="#" className="footer-nav-link">
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <div className="w-full border-t border-gray-700 py-4">
-        <p className="text-center text-xs text-gray-500">
-          Copyright &copy; 株式会社Calitech All Rights Reserved.
-        </p>
-      </div>
+
+      <p className="footer-copyright">Copyright © 株式会社Calltech All Rights Reserved.</p>
     </footer>
   );
 }

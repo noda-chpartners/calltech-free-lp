@@ -1,7 +1,6 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
-const operatorImageUrl =
-  'https://readdy.ai/api/search-image?query=A%20friendly%20young%20Asian%20female%20customer%20support%20representative%20wearing%20a%20headset%20microphone%20smiling%20warmly%20while%20looking%20at%20camera%20professional%20call%20center%20office%20background%20with%20soft%20bokeh%20corporate%20communication%20service%20concept%20warm%20inviting%20lighting%20and%20natural%20makeup&width=500&height=400&seq=7&orientation=landscape';
+const operatorImageUrl = '/images/CTA-picture.png';
 
 export default function CtaBanner() {
   const { ref, isVisible } = useScrollReveal();
@@ -18,14 +17,14 @@ export default function CtaBanner() {
         {`
           .cta-section {
             width: 100%;
-            padding: 46px 20px 0;
-            background: #fff;
+            padding: 46px 20px 54px;
+            background: linear-gradient(180deg, #fff 0%, #fff 62%, #f8fafc 100%);
           }
 
           .cta-banner {
             display: grid;
-            grid-template-columns: 280px minmax(0, 1fr) 470px;
-            gap: 28px;
+            grid-template-columns: 240px minmax(280px, 1fr) minmax(440px, 470px);
+            gap: 20px;
             align-items: center;
             width: 100%;
             max-width: 1180px;
@@ -34,7 +33,9 @@ export default function CtaBanner() {
             overflow: hidden;
             background: linear-gradient(135deg, #ffc400 0%, #ffb800 56%, #ffcf32 100%);
             border-radius: 18px;
-            box-shadow: 0 18px 42px rgba(180, 122, 0, 0.18);
+            box-shadow:
+              0 24px 56px rgba(180, 122, 0, 0.24),
+              0 6px 16px rgba(15, 23, 42, 0.08);
           }
 
           .cta-image-frame {
@@ -63,6 +64,12 @@ export default function CtaBanner() {
             font-weight: 900;
             line-height: 1.45;
             letter-spacing: 0.02em;
+            white-space: nowrap;
+            word-break: keep-all;
+          }
+
+          .cta-title-keep {
+            white-space: nowrap;
           }
 
           .cta-text {
@@ -71,14 +78,15 @@ export default function CtaBanner() {
             font-size: 13px;
             font-weight: 700;
             line-height: 1.8;
+            word-break: keep-all;
           }
 
           .cta-actions {
             display: grid;
-            grid-template-columns: 200px minmax(0, 1fr);
-            gap: 20px;
+            grid-template-columns: 168px minmax(234px, 1fr);
+            gap: 14px;
             align-items: center;
-            padding: 22px 26px 22px 0;
+            padding: 22px 24px 22px 0;
           }
 
           .cta-button {
@@ -87,11 +95,13 @@ export default function CtaBanner() {
             justify-content: center;
             gap: 10px;
             min-height: 52px;
-            padding: 0 24px;
+            padding: 0 20px;
             color: #fff;
             background: #0068b7;
             border-radius: 999px;
-            box-shadow: 0 12px 24px rgba(0, 104, 183, 0.24);
+            box-shadow:
+              0 16px 30px rgba(0, 104, 183, 0.32),
+              inset 0 -2px 0 rgba(0, 0, 0, 0.14);
             font-size: 15px;
             font-weight: 900;
             text-decoration: none;
@@ -105,8 +115,8 @@ export default function CtaBanner() {
           }
 
           .cta-phone {
-            min-width: 0;
-            padding-left: 26px;
+            min-width: max-content;
+            padding-left: 20px;
             border-left: 1px solid rgba(17, 24, 39, 0.18);
           }
 
@@ -124,11 +134,12 @@ export default function CtaBanner() {
             gap: 8px;
             margin: 0;
             color: #0068b7;
-            font-size: 25px;
+            font-size: clamp(22px, 2vw, 25px);
             font-weight: 900;
             line-height: 1.1;
             letter-spacing: 0.02em;
             white-space: nowrap;
+            overflow: visible;
           }
 
           .cta-phone-number i {
@@ -163,7 +174,7 @@ export default function CtaBanner() {
 
           @media (max-width: 767px) {
             .cta-section {
-              padding: 36px 20px 0;
+              padding: 38px 20px 38px;
             }
 
             .cta-banner {
@@ -173,34 +184,47 @@ export default function CtaBanner() {
             }
 
             .cta-image-frame {
-              height: 170px;
+              height: 156px;
               min-height: 0;
             }
 
             .cta-copy {
-              padding: 24px 24px 14px;
+              padding: 24px 22px 12px;
               text-align: center;
             }
 
             .cta-title {
               font-size: 23px;
+              line-height: 1.5;
+              white-space: normal;
             }
 
             .cta-actions {
               grid-template-columns: 1fr;
-              gap: 18px;
-              padding: 0 24px 28px;
+              gap: 16px;
+              padding: 0 22px 28px;
               text-align: center;
             }
 
+            .cta-button {
+              width: 100%;
+              min-height: 50px;
+            }
+
             .cta-phone {
-              padding-left: 0;
+              min-width: 0;
+              padding: 16px 0 0;
               border-left: 0;
+              border-top: 1px solid rgba(17, 24, 39, 0.16);
             }
 
             .cta-phone-number {
               justify-content: center;
-              font-size: 26px;
+              font-size: 25px;
+            }
+
+            .cta-hours {
+              margin-top: 7px;
             }
           }
         `}
@@ -212,7 +236,10 @@ export default function CtaBanner() {
         </div>
 
         <div className="cta-copy">
-          <h3 className="cta-title">まずはお気軽にご相談ください</h3>
+          <h3 className="cta-title">
+            まずはお気軽に<wbr />
+            <span className="cta-title-keep">ご相談ください</span>
+          </h3>
           <p className="cta-text">ご相談・お見積りは無料です。お気軽にお問い合わせください。</p>
         </div>
 
