@@ -38,7 +38,7 @@ export default function HeroSection() {
       <div className="relative mx-auto flex min-h-[572px] w-full max-w-[1280px] items-center px-5 pb-8 pt-7 md:min-h-[614px] md:px-8 md:py-12 lg:py-0 xl:px-0">
         <div className="grid w-full items-center md:gap-10 lg:grid-cols-[minmax(0,650px)_1fr]">
           <div className="max-w-[650px]">
-            <p className="mb-5 inline-flex rounded-full bg-[#ffc400] px-6 py-2 text-sm font-black tracking-wide text-gray-950 shadow-[0_9px_20px_rgba(255,196,0,0.28)] md:mb-7 md:px-7">
+            <p className="mb-5 inline-flex rounded-full bg-[#ffc400] px-6 py-2 text-sm font-black tracking-wide text-gray-950 shadow-[0_5px_12px_rgba(255,196,0,0.16)] md:mb-7 md:px-7">
               店舗・中小法人向け
             </p>
 
@@ -65,14 +65,14 @@ export default function HeroSection() {
             <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="#contact"
-                className="inline-flex h-[52px] min-w-[236px] items-center justify-center gap-3 rounded-full bg-[#ffc400] px-8 text-base font-black text-gray-950 shadow-[0_16px_34px_rgba(255,196,0,0.36)] transition-transform hover:-translate-y-0.5 md:h-[58px]"
+                className="inline-flex h-[52px] min-w-[236px] items-center justify-center gap-3 rounded-full bg-[#ffc400] px-8 text-base font-black text-gray-950 shadow-[0_9px_22px_rgba(255,196,0,0.2)] transition-transform hover:-translate-y-0.5 md:h-[58px]"
               >
                 無料で相談する
                 <i className="ri-arrow-right-s-line text-xl leading-none" aria-hidden="true" />
               </a>
               <a
                 href="#demo"
-                className="inline-flex h-[52px] min-w-[236px] items-center justify-center gap-3 rounded-full border border-gray-900 bg-white px-8 text-base font-black text-gray-950 shadow-[0_12px_28px_rgba(15,23,42,0.1)] transition-colors hover:bg-gray-50 md:h-[58px]"
+                className="inline-flex h-[52px] min-w-[236px] items-center justify-center gap-3 rounded-full border border-gray-900 bg-white px-8 text-base font-black text-gray-950 shadow-[0_7px_16px_rgba(15,23,42,0.05)] transition-colors hover:bg-gray-50 md:h-[58px]"
               >
                 デモサイトを見る
                 <i className="ri-arrow-right-s-line text-xl leading-none" aria-hidden="true" />

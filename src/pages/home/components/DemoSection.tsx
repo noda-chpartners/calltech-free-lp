@@ -73,16 +73,16 @@ export default function DemoSection() {
             border: 1px solid rgba(15, 23, 42, 0.1);
             border-radius: 12px;
             box-shadow:
-              0 20px 44px rgba(15, 23, 42, 0.13),
-              0 4px 12px rgba(15, 23, 42, 0.06);
+              0 12px 30px rgba(15, 23, 42, 0.07),
+              0 2px 8px rgba(15, 23, 42, 0.03);
             transition: transform 180ms ease, box-shadow 180ms ease;
           }
 
           .demo-card:hover {
             transform: translateY(-2px);
             box-shadow:
-              0 26px 56px rgba(15, 23, 42, 0.17),
-              0 6px 16px rgba(15, 23, 42, 0.08);
+              0 18px 38px rgba(15, 23, 42, 0.1),
+              0 3px 10px rgba(15, 23, 42, 0.04);
           }
 
           .demo-image-frame {
@@ -173,8 +173,8 @@ export default function DemoSection() {
             border: 1px solid rgba(0, 104, 183, 0.16);
             border-radius: 999px;
             box-shadow:
-              0 14px 28px rgba(15, 23, 42, 0.18),
-              0 3px 8px rgba(0, 104, 183, 0.1);
+              0 8px 18px rgba(15, 23, 42, 0.09),
+              0 2px 5px rgba(0, 104, 183, 0.06);
             transform: translateY(-50%);
             cursor: pointer;
           }
@@ -260,7 +260,7 @@ export default function DemoSection() {
               top: 43%;
               width: 38px;
               height: 38px;
-              box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+              box-shadow: 0 5px 14px rgba(15, 23, 42, 0.09);
             }
 
             .demo-arrow-left {

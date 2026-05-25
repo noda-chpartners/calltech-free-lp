@@ -11,7 +11,7 @@ export default function Footer() {
             background:
               radial-gradient(circle at 16% 0%, rgba(255, 255, 255, 0.08), transparent 30%),
               linear-gradient(135deg, #2f3333 0%, #202322 100%);
-            box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.08);
+            box-shadow: 0 -8px 18px rgba(15, 23, 42, 0.035);
           }
 
           .footer-inner {

@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed left-0 right-0 top-0 z-50 border-b border-black/10 bg-white transition-shadow duration-300 ${
-        scrolled ? 'shadow-[0_10px_30px_rgba(15,23,42,0.12)]' : 'shadow-[0_3px_14px_rgba(15,23,42,0.05)]'
+        scrolled ? 'shadow-[0_6px_18px_rgba(15,23,42,0.065)]' : 'shadow-[0_2px_8px_rgba(15,23,42,0.03)]'
       }`}
     >
       <div className="mx-auto flex h-[68px] w-full max-w-[1280px] items-center justify-between px-5 md:h-[76px] md:px-8 xl:px-0">
@@ -53,13 +53,13 @@ export default function Navbar() {
         <div className="hidden items-center gap-4 md:flex">
           <a
             href="#contact"
-            className="inline-flex h-10 min-w-[132px] items-center justify-center rounded-full border border-gray-900 bg-white px-5 text-[13px] font-bold text-gray-900 shadow-[0_8px_18px_rgba(15,23,42,0.08)] transition-colors hover:bg-gray-50"
+            className="inline-flex h-10 min-w-[132px] items-center justify-center rounded-full border border-gray-900 bg-white px-5 text-[13px] font-bold text-gray-900 shadow-[0_4px_10px_rgba(15,23,42,0.035)] transition-colors hover:bg-gray-50"
           >
             お問い合わせ
           </a>
           <a
             href="#"
-            className="inline-flex h-10 min-w-[154px] items-center justify-center gap-1 rounded-full bg-brand-blue px-5 text-[13px] font-bold text-white shadow-[0_10px_24px_rgba(0,104,183,0.32)] transition-colors hover:bg-blue-700"
+            className="inline-flex h-10 min-w-[154px] items-center justify-center gap-1 rounded-full bg-brand-blue px-5 text-[13px] font-bold text-white shadow-[0_6px_16px_rgba(0,104,183,0.18)] transition-colors hover:bg-blue-700"
           >
             資料ダウンロード
             <i className="ri-arrow-right-s-line text-base leading-none" aria-hidden="true" />

@@ -76,8 +76,8 @@ export default function PricingSection() {
             border: 1px solid rgba(15, 23, 42, 0.08);
             border-radius: 24px;
             box-shadow:
-              0 22px 54px rgba(15, 23, 42, 0.12),
-              0 4px 12px rgba(15, 23, 42, 0.06);
+              0 14px 34px rgba(15, 23, 42, 0.06),
+              0 2px 8px rgba(15, 23, 42, 0.03);
           }
 
           .pricing-card-body {
@@ -96,7 +96,7 @@ export default function PricingSection() {
             color: #ffc400;
             background: #fff8dd;
             border-radius: 18px;
-            box-shadow: inset 0 -2px 0 rgba(255, 196, 0, 0.16), 0 10px 22px rgba(180, 122, 0, 0.1);
+            box-shadow: inset 0 -2px 0 rgba(255, 196, 0, 0.1), 0 6px 14px rgba(180, 122, 0, 0.05);
           }
 
           .pricing-icon i {

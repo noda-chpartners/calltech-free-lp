@@ -34,8 +34,8 @@ export default function CtaBanner() {
             background: linear-gradient(135deg, #ffc400 0%, #ffb800 56%, #ffcf32 100%);
             border-radius: 18px;
             box-shadow:
-              0 24px 56px rgba(180, 122, 0, 0.24),
-              0 6px 16px rgba(15, 23, 42, 0.08);
+              0 16px 36px rgba(180, 122, 0, 0.13),
+              0 2px 8px rgba(15, 23, 42, 0.04);
           }
 
           .cta-image-frame {
@@ -100,8 +100,8 @@ export default function CtaBanner() {
             background: #0068b7;
             border-radius: 999px;
             box-shadow:
-              0 16px 30px rgba(0, 104, 183, 0.32),
-              inset 0 -2px 0 rgba(0, 0, 0, 0.14);
+              0 9px 20px rgba(0, 104, 183, 0.18),
+              inset 0 -2px 0 rgba(0, 0, 0, 0.07);
             font-size: 15px;
             font-weight: 900;
             text-decoration: none;

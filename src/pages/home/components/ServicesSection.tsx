@@ -73,8 +73,8 @@ export default function ServicesSection() {
             border: 1px solid rgba(15, 23, 42, 0.12);
             border-radius: 14px;
             box-shadow:
-              0 20px 44px rgba(15, 23, 42, 0.1),
-              0 4px 12px rgba(15, 23, 42, 0.05);
+              0 12px 30px rgba(15, 23, 42, 0.055),
+              0 2px 8px rgba(15, 23, 42, 0.03);
           }
 
           .feature-item {
@@ -157,7 +157,7 @@ export default function ServicesSection() {
             color: #fff;
             background: #0068b7;
             border-radius: 999px;
-            box-shadow: 0 9px 18px rgba(0, 104, 183, 0.28);
+            box-shadow: 0 5px 12px rgba(0, 104, 183, 0.16);
           }
 
           .recommend-check i {

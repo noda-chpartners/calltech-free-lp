@@ -62,8 +62,8 @@ export default function ProcessSection() {
             border: 1px solid rgba(15, 23, 42, 0.08);
             border-radius: 14px;
             box-shadow:
-              0 20px 44px rgba(15, 23, 42, 0.11),
-              0 4px 12px rgba(15, 23, 42, 0.05);
+              0 12px 30px rgba(15, 23, 42, 0.055),
+              0 2px 8px rgba(15, 23, 42, 0.03);
           }
 
           .process-number {
@@ -80,8 +80,8 @@ export default function ProcessSection() {
             font-weight: 900;
             line-height: 1;
             box-shadow:
-              0 12px 24px rgba(0, 104, 183, 0.32),
-              inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+              0 7px 16px rgba(0, 104, 183, 0.18),
+              inset 0 -2px 0 rgba(0, 0, 0, 0.06);
           }
 
           .process-title {
