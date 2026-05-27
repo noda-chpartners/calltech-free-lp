@@ -63,7 +63,7 @@ export default function HeroSection() {
             <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="#contact"
-                className="inline-flex h-[52px] min-w-[236px] items-center justify-center gap-3 rounded-full bg-[#0068b7] px-8 text-base font-black text-white shadow-[0_9px_22px_rgba(0,104,183,0.2)] transition-transform hover:-translate-y-0.5 md:h-[58px]"
+                className="inline-flex h-[52px] min-w-[236px] items-center justify-center gap-3 rounded-full bg-[#ffc400] px-8 text-base font-black text-gray-950 shadow-[0_9px_22px_rgba(255,196,0,0.2)] transition-transform hover:-translate-y-0.5 md:h-[58px]"
               >
                 無料で相談する
                 <i className="ri-arrow-right-s-line text-xl leading-none" aria-hidden="true" />
