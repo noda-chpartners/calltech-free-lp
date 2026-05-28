@@ -1,4 +1,12 @@
-const navItems = ['COMPANY', 'SERVICE', 'NEWS', 'RECRUIT', 'CONTACT', 'PRIVACYPOLICY', 'PRIVACYMARK'];
+const navItems = [
+  { label: 'COMPANY', href: 'https://calltech.jp/company' },
+  { label: 'SERVICE', href: 'https://calltech.jp/service' },
+  { label: 'NEWS', href: 'https://calltech.jp/news' },
+  { label: 'RECRUIT', href: 'https://recruit.calltech.jp/' },
+  { label: 'CONTACT', href: 'https://calltech.jp/contact' },
+  { label: 'PRIVACYPOLICY', href: 'https://calltech.jp/privacy-policy' },
+  { label: 'PRIVACYMARK', href: 'https://calltech.jp/privacymark' },
+];
 
 export default function Footer() {
   return (
@@ -217,9 +225,9 @@ export default function Footer() {
         <nav className="footer-nav" aria-label="フッターナビゲーション">
           <ul className="footer-nav-list">
             {navItems.map((item) => (
-              <li key={item}>
-                <a href="#" className="footer-nav-link">
-                  {item}
+              <li key={item.label}>
+                <a href={item.href} className="footer-nav-link" target="_blank" rel="noopener noreferrer">
+                  {item.label}
                 </a>
               </li>
             ))}
