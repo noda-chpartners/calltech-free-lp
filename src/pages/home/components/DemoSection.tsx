@@ -125,7 +125,7 @@ export default function DemoSection() {
     const target = track.querySelector<HTMLElement>(`[data-demo-index="${targetIndex}"]`);
 
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
     } else {
       track.scrollTo({ left: 0, behavior: 'smooth' });
     }
