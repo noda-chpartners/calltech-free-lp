@@ -53,15 +53,9 @@ export default function Navbar() {
         <div className="hidden items-center gap-4 md:flex">
           <a
             href="#contact"
-            className="inline-flex h-10 min-w-[132px] items-center justify-center rounded-full border border-gray-900 bg-white px-5 text-[13px] font-bold text-gray-900 shadow-[0_4px_10px_rgba(15,23,42,0.035)] transition-colors hover:bg-gray-50"
-          >
-            お問い合わせ
-          </a>
-          <a
-            href="#"
             className="inline-flex h-10 min-w-[154px] items-center justify-center gap-1 rounded-full bg-brand-blue px-5 text-[13px] font-bold text-white shadow-[0_6px_16px_rgba(0,104,183,0.18)] transition-colors hover:bg-blue-700"
           >
-            資料ダウンロード
+            お問い合わせ
             <i className="ri-arrow-right-s-line text-base leading-none" aria-hidden="true" />
           </a>
         </div>
@@ -93,17 +87,10 @@ export default function Navbar() {
             <div className="grid gap-3 pt-2">
               <a
                 href="#contact"
-                className="inline-flex h-11 items-center justify-center rounded-full border border-gray-900 text-sm font-bold text-gray-900"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                お問い合わせ
-              </a>
-              <a
-                href="#"
                 className="inline-flex h-11 items-center justify-center gap-1 rounded-full bg-brand-blue text-sm font-bold text-white"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                資料ダウンロード
+                お問い合わせ
                 <i className="ri-arrow-right-s-line text-base leading-none" aria-hidden="true" />
               </a>
             </div>
