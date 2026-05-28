@@ -51,12 +51,6 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-3 md:flex">
           <a
-            href="#demo"
-            className="inline-flex h-10 min-w-[140px] items-center justify-center rounded-full border border-gray-900 bg-white px-5 text-[13px] font-bold text-gray-900 shadow-[0_4px_10px_rgba(15,23,42,0.035)] transition-colors hover:bg-gray-50"
-          >
-            デモサイトを見る
-          </a>
-          <a
             href="#contact"
             className="inline-flex h-10 min-w-[154px] items-center justify-center gap-1 rounded-full bg-brand-blue px-5 text-[13px] font-bold text-white shadow-[0_6px_16px_rgba(0,104,183,0.18)] transition-colors hover:bg-blue-700"
           >
@@ -90,13 +84,6 @@ export default function Navbar() {
               </a>
             ))}
             <div className="grid gap-3 pt-2">
-              <a
-                href="#demo"
-                className="inline-flex h-11 items-center justify-center rounded-full border border-gray-900 text-sm font-bold text-gray-900"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                デモサイトを見る
-              </a>
               <a
                 href="#contact"
                 className="inline-flex h-11 items-center justify-center gap-1 rounded-full bg-brand-blue text-sm font-bold text-white"
