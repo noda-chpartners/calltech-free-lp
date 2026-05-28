@@ -15,13 +15,6 @@ type DemoSite = {
 const demoSites: DemoSite[] = [
   {
     category: '飲食系',
-    title: '和食',
-    url: 'https://hisui-ginza.pages.dev/',
-    image: '/images/demo/hisui-ginza.png',
-    tagColor: 'blue',
-  },
-  {
-    category: '飲食系',
     title: 'アジアンキッチン',
     url: 'https://asian-kitchen-balen.pages.dev/',
     image: '/images/demo/asian-kitchen-balen.png',
@@ -32,13 +25,6 @@ const demoSites: DemoSite[] = [
     title: 'バー',
     url: 'https://bar-lumine.pages.dev/',
     image: '/images/demo/bar-lumine.png',
-    tagColor: 'blue',
-  },
-  {
-    category: '飲食系',
-    title: 'イタリアン',
-    url: 'https://italian-restaurant.pages.dev/',
-    image: '/images/demo/italian-restaurant.png',
     tagColor: 'blue',
   },
   {
@@ -71,7 +57,7 @@ const demoSites: DemoSite[] = [
   },
   {
     category: '専門業種',
-    title: '工業系',
+    title: '工業',
     url: 'https://technoworks.pages.dev/',
     image: '/images/demo/technoworks.png',
     tagColor: 'purple',
