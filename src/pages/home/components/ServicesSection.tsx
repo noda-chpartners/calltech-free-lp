@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const features = [
@@ -9,6 +12,17 @@ const features = [
   { icon: 'ri-lock-line', label: 'SSL対応' },
 ];
 
+const modalFeatures = [
+  ...features,
+  { icon: 'ri-file-list-3-line', label: '1ページ構成' },
+  { icon: 'ri-device-line', label: 'スマホ最適化' },
+  { icon: 'ri-store-2-line', label: '店舗情報掲載' },
+  { icon: 'ri-layout-4-line', label: 'サービス内容掲載' },
+  { icon: 'ri-image-edit-line', label: '画像・テキスト配置' },
+  { icon: 'ri-upload-cloud-2-line', label: '公開作業' },
+  { icon: 'ri-edit-2-line', label: '公開後1回修正' },
+];
+
 const recommendations = [
   'ホームページを持っていない、これから作りたい',
   'コストを抑えてWebで集客を始めたい',
@@ -18,6 +32,67 @@ const recommendations = [
 
 export default function ServicesSection() {
   const { ref, isVisible } = useScrollReveal();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsModalOpen(false);
+      }
+    };
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isModalOpen]);
+
+  const modal = (
+    <div className="services-modal-backdrop" onClick={() => setIsModalOpen(false)}>
+      <div
+        className="services-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="services-modal-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          className="services-modal-close"
+          aria-label="閉じる"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <i className="ri-close-line" aria-hidden="true" />
+        </button>
+
+        <h3 id="services-modal-title" className="services-modal-title">
+          機能一覧
+        </h3>
+        <p className="services-modal-lead">
+          無料範囲で対応できる機能をまとめています。内容により対応範囲が異なる場合があります。
+        </p>
+
+        <div className="modal-feature-grid">
+          {modalFeatures.map((feature) => (
+            <div key={feature.label} className="modal-feature-card">
+              <span className="feature-icon" aria-hidden="true">
+                <i className={feature.icon} />
+              </span>
+              <span className="feature-label">{feature.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section
@@ -122,10 +197,28 @@ export default function ServicesSection() {
             align-items: center;
             gap: 8px;
             margin-top: 24px;
+            padding: 0;
             color: #0068b7;
+            background: transparent;
+            border: 0;
             font-size: 14px;
             font-weight: 900;
+            font-family: inherit;
             text-decoration: none;
+            cursor: pointer;
+            transition: color 180ms ease;
+          }
+
+          .services-detail-link i {
+            transition: transform 180ms ease;
+          }
+
+          .services-detail-link:hover {
+            color: #005ca3;
+          }
+
+          .services-detail-link:hover i {
+            transform: translateX(3px);
           }
 
           .recommend-list {
@@ -165,10 +258,112 @@ export default function ServicesSection() {
             line-height: 1;
           }
 
+          .services-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            background: rgba(15, 23, 42, 0.58);
+            backdrop-filter: blur(4px);
+          }
+
+          .services-modal {
+            position: relative;
+            width: min(920px, 100%);
+            max-height: min(82vh, 760px);
+            overflow-y: auto;
+            padding: 36px;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 22px;
+            box-shadow:
+              0 24px 60px rgba(15, 23, 42, 0.2),
+              0 8px 22px rgba(15, 23, 42, 0.1);
+          }
+
+          .services-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            color: #0f172a;
+            background: #f8fafc;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 999px;
+            cursor: pointer;
+            transition:
+              background 180ms ease,
+              color 180ms ease,
+              transform 180ms ease;
+          }
+
+          .services-modal-close:hover {
+            color: #0068b7;
+            background: #eef6fc;
+            transform: translateY(-1px);
+          }
+
+          .services-modal-close i {
+            font-size: 22px;
+            line-height: 1;
+          }
+
+          .services-modal-title {
+            margin: 0 48px 12px 0;
+            color: #0f172a;
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1.35;
+          }
+
+          .services-modal-lead {
+            max-width: 690px;
+            margin: 0 0 26px;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.8;
+          }
+
+          .modal-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+          }
+
+          .modal-feature-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-height: 70px;
+            padding: 18px 20px;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.045);
+          }
+
+          .modal-feature-card .feature-icon {
+            color: #0068b7;
+            background: rgba(0, 104, 183, 0.06);
+            border-radius: 12px;
+          }
+
           @media (max-width: 1023px) {
             .services-inner {
               grid-template-columns: 1fr;
               gap: 42px;
+            }
+
+            .modal-feature-grid {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
             }
           }
 
@@ -204,6 +399,38 @@ export default function ServicesSection() {
             .recommend-list {
               gap: 16px;
             }
+
+            .services-modal-backdrop {
+              align-items: flex-start;
+              padding: 18px;
+              overflow-y: auto;
+            }
+
+            .services-modal {
+              max-height: none;
+              padding: 30px 20px 22px;
+              border-radius: 18px;
+            }
+
+            .services-modal-title {
+              margin-right: 44px;
+              font-size: 23px;
+            }
+
+            .services-modal-lead {
+              margin-bottom: 22px;
+              font-size: 13px;
+            }
+
+            .modal-feature-grid {
+              grid-template-columns: 1fr;
+              gap: 10px;
+            }
+
+            .modal-feature-card {
+              min-height: 64px;
+              padding: 16px;
+            }
           }
         `}
       </style>
@@ -222,10 +449,10 @@ export default function ServicesSection() {
             ))}
           </div>
 
-          <a href="#" className="services-detail-link">
+          <button type="button" className="services-detail-link" onClick={() => setIsModalOpen(true)}>
             機能の詳細を見る
             <i className="ri-arrow-right-s-line text-lg leading-none" aria-hidden="true" />
-          </a>
+          </button>
         </div>
 
         <div className="recommend-panel">
@@ -242,6 +469,8 @@ export default function ServicesSection() {
           </ul>
         </div>
       </div>
+
+      {isModalOpen && createPortal(modal, document.body)}
     </section>
   );
 }
