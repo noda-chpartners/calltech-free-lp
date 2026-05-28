@@ -73,17 +73,10 @@ export default function Footer() {
           }
 
           .footer-privacy-mark {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            color: rgba(255, 255, 255, 0.88);
-            border: 2px solid rgba(255, 255, 255, 0.72);
-            border-radius: 999px;
-            font-size: 17px;
-            font-weight: 900;
-            letter-spacing: -0.05em;
+            display: block;
+            width: 58px;
+            height: auto;
+            flex: 0 0 auto;
           }
 
           .footer-social-link {
@@ -207,9 +200,7 @@ export default function Footer() {
           </address>
 
           <div className="footer-social" aria-label="SNSとプライバシーマーク">
-            <span className="footer-privacy-mark" aria-label="プライバシーマーク">
-              P
-            </span>
+            <img src="/images/privacy-mark.png" alt="プライバシーマーク" className="footer-privacy-mark" />
             <a href="#" className="footer-social-link" aria-label="Instagram">
               <i className="ri-instagram-line" aria-hidden="true" />
             </a>
