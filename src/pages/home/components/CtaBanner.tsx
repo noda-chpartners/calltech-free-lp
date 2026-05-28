@@ -47,22 +47,6 @@ export default function CtaBanner() {
             background: #ffc400;
           }
 
-          .cta-image-frame::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: -1px;
-            bottom: 0;
-            width: 46px;
-            background: linear-gradient(
-              90deg,
-              rgba(255, 196, 0, 0) 0%,
-              rgba(255, 196, 0, 0.16) 58%,
-              rgba(255, 196, 0, 0.62) 100%
-            );
-            pointer-events: none;
-          }
-
           .cta-image {
             display: block;
             width: 100%;
@@ -203,21 +187,6 @@ export default function CtaBanner() {
               min-height: 0;
             }
 
-            .cta-image-frame::after {
-              top: auto;
-              right: 0;
-              bottom: -1px;
-              left: 0;
-              width: auto;
-              height: 22px;
-              background: linear-gradient(
-                180deg,
-                rgba(255, 196, 0, 0) 0%,
-                rgba(255, 196, 0, 0.12) 70%,
-                rgba(255, 196, 0, 0.28) 100%
-              );
-            }
-
             .cta-image {
               object-position: center 36%;
             }
@@ -251,11 +220,6 @@ export default function CtaBanner() {
             .cta-image-frame {
               height: 156px;
               min-height: 0;
-            }
-
-            .cta-image-frame::after {
-              height: 14px;
-              background: linear-gradient(180deg, rgba(255, 196, 0, 0) 0%, rgba(255, 196, 0, 0.18) 100%);
             }
 
             .cta-image {
