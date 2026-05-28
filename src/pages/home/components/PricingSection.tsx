@@ -23,6 +23,7 @@ export default function PricingSection() {
 
   return (
     <section
+      id="pricing"
       ref={ref}
       className={`pricing-section w-full bg-white transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'

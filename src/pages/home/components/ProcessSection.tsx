@@ -13,6 +13,7 @@ export default function ProcessSection() {
 
   return (
     <section
+      id="process"
       ref={ref}
       className={`process-section transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'

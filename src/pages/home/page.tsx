@@ -4,6 +4,7 @@ import PricingSection from './components/PricingSection';
 import ServicesSection from './components/ServicesSection';
 import DemoSection from './components/DemoSection';
 import ProcessSection from './components/ProcessSection';
+import FAQSection from './components/FAQSection';
 import CtaBanner from './components/CtaBanner';
 import Footer from './components/Footer';
 
@@ -16,6 +17,7 @@ export default function Home() {
       <ServicesSection />
       <DemoSection />
       <ProcessSection />
+      <FAQSection />
       <CtaBanner />
       <Footer />
     </main>
