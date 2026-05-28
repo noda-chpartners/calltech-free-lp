@@ -53,12 +53,12 @@ export default function CtaBanner() {
             top: 0;
             right: -1px;
             bottom: 0;
-            width: 78px;
+            width: 46px;
             background: linear-gradient(
               90deg,
               rgba(255, 196, 0, 0) 0%,
-              rgba(255, 196, 0, 0.42) 58%,
-              #ffc400 100%
+              rgba(255, 196, 0, 0.16) 58%,
+              rgba(255, 196, 0, 0.62) 100%
             );
             pointer-events: none;
           }
@@ -68,7 +68,7 @@ export default function CtaBanner() {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: center 42%;
             transform: scaleX(-1);
           }
 
@@ -192,6 +192,51 @@ export default function CtaBanner() {
             }
           }
 
+          @media (max-width: 900px) {
+            .cta-banner {
+              grid-template-columns: 1fr;
+              gap: 0;
+            }
+
+            .cta-image-frame {
+              height: 172px;
+              min-height: 0;
+            }
+
+            .cta-image-frame::after {
+              top: auto;
+              right: 0;
+              bottom: -1px;
+              left: 0;
+              width: auto;
+              height: 22px;
+              background: linear-gradient(
+                180deg,
+                rgba(255, 196, 0, 0) 0%,
+                rgba(255, 196, 0, 0.12) 70%,
+                rgba(255, 196, 0, 0.28) 100%
+              );
+            }
+
+            .cta-image {
+              object-position: center 36%;
+            }
+
+            .cta-copy {
+              padding: 24px 28px 12px;
+              text-align: center;
+            }
+
+            .cta-title {
+              white-space: normal;
+            }
+
+            .cta-actions {
+              grid-template-columns: minmax(180px, 240px) minmax(260px, 1fr);
+              padding: 0 28px 28px;
+            }
+          }
+
           @media (max-width: 767px) {
             .cta-section {
               padding: 38px 20px 38px;
@@ -209,18 +254,12 @@ export default function CtaBanner() {
             }
 
             .cta-image-frame::after {
-              top: auto;
-              right: 0;
-              bottom: -1px;
-              left: 0;
-              width: auto;
-              height: 48px;
-              background: linear-gradient(
-                180deg,
-                rgba(255, 196, 0, 0) 0%,
-                rgba(255, 196, 0, 0.38) 60%,
-                #ffc400 100%
-              );
+              height: 14px;
+              background: linear-gradient(180deg, rgba(255, 196, 0, 0) 0%, rgba(255, 196, 0, 0.18) 100%);
+            }
+
+            .cta-image {
+              object-position: center 34%;
             }
 
             .cta-copy {
