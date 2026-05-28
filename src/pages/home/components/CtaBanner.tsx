@@ -23,12 +23,12 @@ export default function CtaBanner() {
 
           .cta-banner {
             display: grid;
-            grid-template-columns: 240px minmax(280px, 1fr) minmax(440px, 470px);
-            gap: 20px;
-            align-items: center;
+            grid-template-columns: 300px minmax(0, 1fr) minmax(380px, 430px);
+            gap: 28px;
+            align-items: stretch;
             width: 100%;
             max-width: 1180px;
-            min-height: 122px;
+            min-height: 150px;
             margin: 0 auto;
             overflow: hidden;
             background: linear-gradient(135deg, #ffc400 0%, #ffb800 56%, #ffcf32 100%);
@@ -41,8 +41,8 @@ export default function CtaBanner() {
           .cta-image-frame {
             position: relative;
             align-self: stretch;
-            height: 122px;
-            min-height: 122px;
+            height: auto;
+            min-height: 100%;
             overflow: hidden;
             background: #ffc400;
           }
@@ -57,8 +57,11 @@ export default function CtaBanner() {
           }
 
           .cta-copy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             min-width: 0;
-            padding: 24px 0;
+            padding: 28px 0;
           }
 
           .cta-title {
@@ -87,10 +90,11 @@ export default function CtaBanner() {
 
           .cta-actions {
             display: grid;
-            grid-template-columns: 168px minmax(234px, 1fr);
+            grid-template-columns: minmax(158px, 180px) minmax(206px, 1fr);
             gap: 14px;
             align-items: center;
-            padding: 22px 24px 22px 0;
+            align-self: center;
+            padding: 24px 28px 24px 0;
           }
 
           .cta-button {
@@ -161,38 +165,32 @@ export default function CtaBanner() {
 
           @media (max-width: 1100px) {
             .cta-banner {
-              grid-template-columns: 220px minmax(0, 1fr);
-              gap: 26px;
+              grid-template-columns: minmax(0, 1fr) minmax(380px, 430px);
+              gap: 24px;
             }
 
             .cta-image-frame {
-              height: 150px;
+              display: none;
+            }
+
+            .cta-copy {
+              padding: 28px 0 28px 32px;
             }
 
             .cta-actions {
-              grid-column: 1 / -1;
-              grid-template-columns: minmax(180px, 240px) 1fr;
-              padding: 0 28px 28px;
+              grid-template-columns: minmax(164px, 190px) minmax(220px, 1fr);
+              padding: 24px 28px 24px 0;
             }
           }
 
-          @media (max-width: 900px) {
+          @media (max-width: 920px) {
             .cta-banner {
               grid-template-columns: 1fr;
               gap: 0;
             }
 
-            .cta-image-frame {
-              height: 172px;
-              min-height: 0;
-            }
-
-            .cta-image {
-              object-position: center 36%;
-            }
-
             .cta-copy {
-              padding: 24px 28px 12px;
+              padding: 28px 28px 12px;
               text-align: center;
             }
 
@@ -218,12 +216,7 @@ export default function CtaBanner() {
             }
 
             .cta-image-frame {
-              height: 156px;
-              min-height: 0;
-            }
-
-            .cta-image {
-              object-position: center 34%;
+              display: none;
             }
 
             .cta-copy {
