@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 type DemoCategory = '飲食系' | '店舗・生活サービス' | '美容・健康' | '専門業種';
@@ -17,63 +17,63 @@ const demoSites: DemoSite[] = [
     category: '飲食系',
     title: '和食',
     url: 'https://hisui-ginza.pages.dev/',
-    image: '',
+    image: '/images/demo/hisui-ginza.png',
     tagColor: 'blue',
   },
   {
     category: '飲食系',
     title: 'アジアンキッチン',
     url: 'https://asian-kitchen-balen.pages.dev/',
-    image: '',
+    image: '/images/demo/asian-kitchen-balen.png',
     tagColor: 'blue',
   },
   {
     category: '飲食系',
     title: 'バー',
     url: 'https://bar-lumine.pages.dev/',
-    image: '',
+    image: '/images/demo/bar-lumine.png',
     tagColor: 'blue',
   },
   {
     category: '飲食系',
     title: 'イタリアン',
     url: 'https://italian-restaurant.pages.dev/',
-    image: '',
+    image: '/images/demo/italian-restaurant.png',
     tagColor: 'blue',
   },
   {
     category: '店舗・生活サービス',
     title: 'ペットサロン・トリミング',
     url: 'https://paws-bloom.pages.dev/',
-    image: '',
+    image: '/images/demo/paws-bloom.png',
     tagColor: 'sky',
   },
   {
     category: '美容・健康',
     title: 'サロン',
     url: 'https://private-beauty.pages.dev/',
-    image: '',
+    image: '/images/demo/private-beauty.png',
     tagColor: 'green',
   },
   {
     category: '美容・健康',
     title: 'メンズエステ',
     url: 'https://mens-salon2.pages.dev/',
-    image: '',
+    image: '/images/demo/mens-salon2.png',
     tagColor: 'green',
   },
   {
     category: '専門業種',
     title: '自動車整備・板金',
     url: 'https://tanaka-car-service.pages.dev/',
-    image: '',
+    image: '/images/demo/tanaka-car-service.png',
     tagColor: 'purple',
   },
   {
     category: '専門業種',
     title: '工業系',
     url: 'https://technoworks.pages.dev/',
-    image: '',
+    image: '/images/demo/technoworks.png',
     tagColor: 'purple',
   },
 ];
@@ -87,12 +87,49 @@ const placeholderIconMap: Record<DemoCategory, string> = {
   専門業種: 'ri-tools-line',
 };
 
+const visualToneMap: Record<DemoCategory, string> = {
+  飲食系: 'demo-visual-food',
+  '店舗・生活サービス': 'demo-visual-service',
+  '美容・健康': 'demo-visual-beauty',
+  専門業種: 'demo-visual-specialty',
+};
+
 export default function DemoSection() {
   const { ref, isVisible } = useScrollReveal();
+  const trackRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<DemoFilter>('すべて');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [failedImages, setFailedImages] = useState<string[]>([]);
 
   const filteredSites =
     activeFilter === 'すべて' ? demoSites : demoSites.filter((site) => site.category === activeFilter);
+
+  const scrollToCard = (index: number) => {
+    const track = trackRef.current;
+    const target = track?.querySelector<HTMLElement>(`[data-demo-index="${index}"]`);
+    if (!track || !target) return;
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    setCurrentIndex(index);
+  };
+
+  const moveSlide = (direction: -1 | 1) => {
+    if (!filteredSites.length) return;
+    const nextIndex = (currentIndex + direction + filteredSites.length) % filteredSites.length;
+    scrollToCard(nextIndex);
+  };
+
+  const changeFilter = (filter: DemoFilter) => {
+    setActiveFilter(filter);
+    setCurrentIndex(0);
+    requestAnimationFrame(() => {
+      trackRef.current?.scrollTo({ left: 0, behavior: 'smooth' });
+    });
+  };
+
+  const markImageFailed = (image: string) => {
+    setFailedImages((current) => (current.includes(image) ? current : [...current, image]));
+  };
 
   return (
     <section
@@ -169,15 +206,33 @@ export default function DemoSection() {
             box-shadow: 0 9px 18px rgba(0, 104, 183, 0.14);
           }
 
-          .demo-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+          .demo-carousel {
+            position: relative;
+          }
+
+          .demo-track-wrap {
+            overflow: hidden;
+          }
+
+          .demo-track {
+            display: flex;
             gap: 24px;
+            overflow-x: auto;
+            padding: 2px 2px 14px;
+            scroll-behavior: smooth;
+            scroll-padding-left: 2px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+          }
+
+          .demo-track::-webkit-scrollbar {
+            display: none;
           }
 
           .demo-card {
             display: flex;
-            min-height: 100%;
+            flex: 0 0 calc((100% - 72px) / 4);
+            min-width: 0;
             overflow: hidden;
             background: #fff;
             border: 1px solid rgba(15, 23, 42, 0.1);
@@ -186,6 +241,7 @@ export default function DemoSection() {
               0 12px 28px rgba(15, 23, 42, 0.07),
               0 2px 8px rgba(15, 23, 42, 0.03);
             flex-direction: column;
+            scroll-snap-align: start;
             transition: transform 180ms ease, box-shadow 180ms ease;
           }
 
@@ -199,7 +255,6 @@ export default function DemoSection() {
           .demo-visual {
             position: relative;
             display: flex;
-            min-height: 154px;
             aspect-ratio: 16 / 9;
             overflow: hidden;
             align-items: center;
@@ -259,15 +314,20 @@ export default function DemoSection() {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: top center;
+            transition: transform 220ms ease;
+          }
+
+          .demo-card:hover .demo-image {
+            transform: scale(1.025);
           }
 
           .demo-placeholder {
             position: relative;
             display: flex;
-            width: calc(100% - 40px);
-            min-height: 92px;
-            padding: 18px 20px;
+            width: calc(100% - 36px);
+            min-height: 82px;
+            padding: 16px 18px;
             align-items: center;
             justify-content: space-between;
             background: rgba(255, 255, 255, 0.72);
@@ -294,8 +354,8 @@ export default function DemoSection() {
 
           .demo-placeholder-icon {
             display: flex;
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
             align-items: center;
             justify-content: center;
             color: #0068b7;
@@ -305,14 +365,14 @@ export default function DemoSection() {
           }
 
           .demo-placeholder-icon i {
-            font-size: 25px;
+            font-size: 24px;
             line-height: 1;
           }
 
           .demo-card-body {
             display: flex;
             flex: 1;
-            padding: 16px 18px 18px;
+            padding: 15px 16px 16px;
             flex-direction: column;
           }
 
@@ -320,7 +380,7 @@ export default function DemoSection() {
             display: inline-flex;
             width: fit-content;
             min-height: 24px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             padding: 5px 10px;
             align-items: center;
             justify-content: center;
@@ -348,10 +408,10 @@ export default function DemoSection() {
           }
 
           .demo-title {
-            min-height: 50px;
-            margin: 0 0 14px;
+            min-height: 46px;
+            margin: 0 0 13px;
             color: #111827;
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 900;
             line-height: 1.45;
           }
@@ -359,7 +419,7 @@ export default function DemoSection() {
           .demo-button {
             display: inline-flex;
             width: 100%;
-            min-height: 38px;
+            min-height: 36px;
             margin-top: auto;
             align-items: center;
             justify-content: center;
@@ -368,7 +428,7 @@ export default function DemoSection() {
             background: #fff;
             border: 1px solid rgba(15, 23, 42, 0.34);
             border-radius: 999px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 900;
             text-decoration: none;
             transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
@@ -381,13 +441,94 @@ export default function DemoSection() {
           }
 
           .demo-button i {
-            font-size: 17px;
+            font-size: 16px;
             line-height: 1;
           }
 
+          .demo-arrow {
+            position: absolute;
+            top: 42%;
+            z-index: 2;
+            display: flex;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            color: #0068b7;
+            background: #fff;
+            border: 1px solid rgba(0, 104, 183, 0.16);
+            border-radius: 999px;
+            box-shadow:
+              0 8px 18px rgba(15, 23, 42, 0.09),
+              0 2px 5px rgba(0, 104, 183, 0.06);
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+          }
+
+          .demo-arrow:hover {
+            color: #fff;
+            background: #0068b7;
+            transform: translateY(-50%) translateY(-1px);
+          }
+
+          .demo-arrow:disabled {
+            opacity: 0.42;
+            cursor: default;
+            pointer-events: none;
+          }
+
+          .demo-arrow-left {
+            left: -52px;
+          }
+
+          .demo-arrow-right {
+            right: -52px;
+          }
+
+          .demo-arrow i {
+            font-size: 22px;
+            line-height: 1;
+          }
+
+          .demo-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 18px;
+          }
+
+          .demo-dot {
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            background: #d7dde6;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+          }
+
+          .demo-dot.is-active {
+            width: 18px;
+            background: #ffc400;
+          }
+
+          @media (max-width: 1299px) {
+            .demo-arrow-left {
+              left: -14px;
+            }
+
+            .demo-arrow-right {
+              right: -14px;
+            }
+          }
+
           @media (max-width: 1023px) {
-            .demo-grid {
-              grid-template-columns: repeat(2, minmax(0, 1fr));
+            .demo-card {
+              flex-basis: calc((100% - 20px) / 2);
+            }
+
+            .demo-track {
               gap: 20px;
             }
           }
@@ -411,7 +552,7 @@ export default function DemoSection() {
               flex-wrap: nowrap;
               justify-content: flex-start;
               overflow-x: auto;
-              margin: 0 -20px 24px;
+              margin: 0 -20px 22px;
               padding: 0 20px 6px;
               scrollbar-width: none;
             }
@@ -424,17 +565,38 @@ export default function DemoSection() {
               flex: 0 0 auto;
             }
 
-            .demo-grid {
-              grid-template-columns: 1fr;
-              gap: 18px;
+            .demo-track-wrap {
+              margin: 0 -20px;
+              overflow: visible;
+            }
+
+            .demo-track {
+              gap: 16px;
+              padding: 2px 28px 12px;
+              scroll-padding-left: 28px;
+            }
+
+            .demo-card {
+              flex: 0 0 min(82vw, 320px);
             }
 
             .demo-title {
               min-height: 0;
             }
 
-            .demo-card-body {
-              padding: 15px 16px 17px;
+            .demo-arrow {
+              top: 43%;
+              width: 38px;
+              height: 38px;
+              box-shadow: 0 5px 14px rgba(15, 23, 42, 0.09);
+            }
+
+            .demo-arrow-left {
+              left: 2px;
+            }
+
+            .demo-arrow-right {
+              right: 2px;
             }
           }
         `}
@@ -450,7 +612,7 @@ export default function DemoSection() {
               key={filter}
               type="button"
               className={`demo-category-tab ${activeFilter === filter ? 'is-active' : ''}`}
-              onClick={() => setActiveFilter(filter)}
+              onClick={() => changeFilter(filter)}
               aria-pressed={activeFilter === filter}
             >
               {filter}
@@ -458,45 +620,83 @@ export default function DemoSection() {
           ))}
         </div>
 
-        <div className="demo-grid">
-          {filteredSites.map((site) => (
-            <article key={`${site.category}-${site.title}`} className="demo-card">
-              <div
-                className={`demo-visual ${
-                  site.category === '飲食系'
-                    ? 'demo-visual-food'
-                    : site.category === '店舗・生活サービス'
-                      ? 'demo-visual-service'
-                      : site.category === '美容・健康'
-                        ? 'demo-visual-beauty'
-                        : 'demo-visual-specialty'
-                }`}
-              >
-                {site.image ? (
-                  <img src={site.image} alt={`${site.title}のデモサイト`} className="demo-image" loading="lazy" />
-                ) : (
-                  <div className="demo-placeholder" aria-hidden="true">
-                    <p className="demo-placeholder-text">
-                      {site.title}
-                      <span>{site.category}デモ</span>
-                    </p>
-                    <span className="demo-placeholder-icon">
-                      <i className={placeholderIconMap[site.category]} aria-hidden="true" />
-                    </span>
-                  </div>
-                )}
-              </div>
-              <div className="demo-card-body">
-                <span className={`demo-tag demo-tag-${site.tagColor}`}>{site.category}</span>
-                <h4 className="demo-title">{site.title}</h4>
-                <a href={site.url} className="demo-button" target="_blank" rel="noopener noreferrer">
-                  デモを見る
-                  <i className="ri-external-link-line" aria-hidden="true" />
-                </a>
-              </div>
-            </article>
-          ))}
+        <div className="demo-carousel">
+          <button
+            type="button"
+            className="demo-arrow demo-arrow-left"
+            onClick={() => moveSlide(-1)}
+            disabled={filteredSites.length <= 1}
+            aria-label="前のデモサイトを見る"
+          >
+            <i className="ri-arrow-left-s-line" aria-hidden="true" />
+          </button>
+
+          <div className="demo-track-wrap">
+            <div ref={trackRef} className="demo-track">
+              {filteredSites.map((site, index) => {
+                const hasImage = Boolean(site.image) && !failedImages.includes(site.image);
+
+                return (
+                  <article key={`${site.category}-${site.title}`} className="demo-card" data-demo-index={index}>
+                    <div className={`demo-visual ${visualToneMap[site.category]}`}>
+                      {hasImage ? (
+                        <img
+                          src={site.image}
+                          alt={`${site.title}のデモサイトのファーストビュー`}
+                          className="demo-image"
+                          loading="lazy"
+                          onError={() => markImageFailed(site.image)}
+                        />
+                      ) : (
+                        <div className="demo-placeholder" aria-hidden="true">
+                          <p className="demo-placeholder-text">
+                            {site.title}
+                            <span>{site.category}デモ</span>
+                          </p>
+                          <span className="demo-placeholder-icon">
+                            <i className={placeholderIconMap[site.category]} aria-hidden="true" />
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="demo-card-body">
+                      <span className={`demo-tag demo-tag-${site.tagColor}`}>{site.category}</span>
+                      <h4 className="demo-title">{site.title}</h4>
+                      <a href={site.url} className="demo-button" target="_blank" rel="noopener noreferrer">
+                        デモを見る
+                        <i className="ri-external-link-line" aria-hidden="true" />
+                      </a>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="demo-arrow demo-arrow-right"
+            onClick={() => moveSlide(1)}
+            disabled={filteredSites.length <= 1}
+            aria-label="次のデモサイトを見る"
+          >
+            <i className="ri-arrow-right-s-line" aria-hidden="true" />
+          </button>
         </div>
+
+        {filteredSites.length > 1 && (
+          <div className="demo-dots" aria-hidden="true">
+            {filteredSites.map((site, index) => (
+              <button
+                key={`${site.category}-${site.title}-dot`}
+                type="button"
+                className={`demo-dot ${index === currentIndex ? 'is-active' : ''}`}
+                onClick={() => scrollToCard(index)}
+                tabIndex={-1}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
