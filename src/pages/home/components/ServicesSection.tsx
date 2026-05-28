@@ -19,6 +19,7 @@ const modalFeatures = [
   { icon: 'ri-store-2-line', label: '店舗情報掲載' },
   { icon: 'ri-layout-4-line', label: 'サービス内容掲載' },
   { icon: 'ri-image-edit-line', label: '画像・テキスト配置' },
+  { icon: 'ri-file-text-line', label: '掲載内容の整理' },
   { icon: 'ri-upload-cloud-2-line', label: '公開作業' },
   { icon: 'ri-edit-2-line', label: '公開後1回修正' },
 ];
@@ -334,7 +335,7 @@ export default function ServicesSection() {
 
           .modal-feature-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
           }
 
@@ -360,10 +361,6 @@ export default function ServicesSection() {
             .services-inner {
               grid-template-columns: 1fr;
               gap: 42px;
-            }
-
-            .modal-feature-grid {
-              grid-template-columns: repeat(2, minmax(0, 1fr));
             }
           }
 
