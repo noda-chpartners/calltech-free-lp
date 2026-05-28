@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 type DemoCategory = '飲食系' | '店舗・生活サービス' | '美容・健康' | '専門業種';
@@ -80,34 +80,69 @@ const visualToneMap: Record<DemoCategory, string> = {
   専門業種: 'demo-visual-specialty',
 };
 
+const getCardsPerPage = () => {
+  if (typeof window === 'undefined') return 4;
+  if (window.innerWidth <= 767) return 1;
+  if (window.innerWidth <= 1023) return 2;
+  return 4;
+};
+
 export default function DemoSection() {
   const { ref, isVisible } = useScrollReveal();
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<DemoFilter>('すべて');
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [cardsPerPage, setCardsPerPage] = useState(getCardsPerPage);
   const [failedImages, setFailedImages] = useState<string[]>([]);
 
   const filteredSites =
     activeFilter === 'すべて' ? demoSites : demoSites.filter((site) => site.category === activeFilter);
+  const pageCount = Math.max(1, Math.ceil(filteredSites.length / cardsPerPage));
+  const shouldShowControls = pageCount > 1;
 
-  const scrollToCard = (index: number) => {
+  useEffect(() => {
+    const updateCardsPerPage = () => {
+      setCardsPerPage(getCardsPerPage());
+    };
+
+    updateCardsPerPage();
+    window.addEventListener('resize', updateCardsPerPage);
+
+    return () => {
+      window.removeEventListener('resize', updateCardsPerPage);
+    };
+  }, []);
+
+  useEffect(() => {
+    setCurrentPage((page) => Math.min(page, pageCount - 1));
+  }, [pageCount]);
+
+  useEffect(() => {
     const track = trackRef.current;
-    const target = track?.querySelector<HTMLElement>(`[data-demo-index="${index}"]`);
-    if (!track || !target) return;
+    if (!track) return;
 
-    target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-    setCurrentIndex(index);
+    const targetIndex = Math.min(currentPage * cardsPerPage, Math.max(filteredSites.length - 1, 0));
+    const target = track.querySelector<HTMLElement>(`[data-demo-index="${targetIndex}"]`);
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    } else {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+  }, [cardsPerPage, currentPage, filteredSites.length]);
+
+  const scrollToPage = (page: number) => {
+    const nextPage = Math.max(0, Math.min(page, pageCount - 1));
+    setCurrentPage(nextPage);
   };
 
   const moveSlide = (direction: -1 | 1) => {
-    if (!filteredSites.length) return;
-    const nextIndex = (currentIndex + direction + filteredSites.length) % filteredSites.length;
-    scrollToCard(nextIndex);
+    scrollToPage(currentPage + direction);
   };
 
   const changeFilter = (filter: DemoFilter) => {
     setActiveFilter(filter);
-    setCurrentIndex(0);
+    setCurrentPage(0);
     requestAnimationFrame(() => {
       trackRef.current?.scrollTo({ left: 0, behavior: 'smooth' });
     });
@@ -607,15 +642,17 @@ export default function DemoSection() {
         </div>
 
         <div className="demo-carousel">
-          <button
-            type="button"
-            className="demo-arrow demo-arrow-left"
-            onClick={() => moveSlide(-1)}
-            disabled={filteredSites.length <= 1}
-            aria-label="前のデモサイトを見る"
-          >
-            <i className="ri-arrow-left-s-line" aria-hidden="true" />
-          </button>
+          {shouldShowControls && (
+            <button
+              type="button"
+              className="demo-arrow demo-arrow-left"
+              onClick={() => moveSlide(-1)}
+              disabled={currentPage === 0}
+              aria-label="前のデモサイトを見る"
+            >
+              <i className="ri-arrow-left-s-line" aria-hidden="true" />
+            </button>
+          )}
 
           <div className="demo-track-wrap">
             <div ref={trackRef} className="demo-track">
@@ -659,25 +696,27 @@ export default function DemoSection() {
             </div>
           </div>
 
-          <button
-            type="button"
-            className="demo-arrow demo-arrow-right"
-            onClick={() => moveSlide(1)}
-            disabled={filteredSites.length <= 1}
-            aria-label="次のデモサイトを見る"
-          >
-            <i className="ri-arrow-right-s-line" aria-hidden="true" />
-          </button>
+          {shouldShowControls && (
+            <button
+              type="button"
+              className="demo-arrow demo-arrow-right"
+              onClick={() => moveSlide(1)}
+              disabled={currentPage >= pageCount - 1}
+              aria-label="次のデモサイトを見る"
+            >
+              <i className="ri-arrow-right-s-line" aria-hidden="true" />
+            </button>
+          )}
         </div>
 
-        {filteredSites.length > 1 && (
+        {shouldShowControls && (
           <div className="demo-dots" aria-hidden="true">
-            {filteredSites.map((site, index) => (
+            {Array.from({ length: pageCount }).map((_, index) => (
               <button
-                key={`${site.category}-${site.title}-dot`}
+                key={`demo-page-${index}`}
                 type="button"
-                className={`demo-dot ${index === currentIndex ? 'is-active' : ''}`}
-                onClick={() => scrollToCard(index)}
+                className={`demo-dot ${index === currentPage ? 'is-active' : ''}`}
+                onClick={() => scrollToPage(index)}
                 tabIndex={-1}
               />
             ))}
