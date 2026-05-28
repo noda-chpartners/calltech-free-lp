@@ -38,10 +38,6 @@ export default function HeroSection() {
       <div className="relative mx-auto flex min-h-[572px] w-full max-w-[1280px] items-center px-5 pb-8 pt-7 md:min-h-[614px] md:px-8 md:py-12 lg:py-0 xl:px-0">
         <div className="grid w-full items-center md:gap-10 lg:grid-cols-[minmax(0,650px)_1fr]">
           <div className="max-w-[650px]">
-            <p className="mb-5 inline-flex rounded-full bg-[#0068b7] px-6 py-2 text-sm font-black tracking-wide text-white shadow-[0_5px_12px_rgba(0,104,183,0.16)] md:mb-7 md:px-7">
-              店舗・中小法人向け
-            </p>
-
             <h1 className="mb-5 text-[38px] font-black leading-[1.16] tracking-normal text-gray-950 sm:text-[42px] md:mb-7 md:text-[56px] lg:whitespace-nowrap xl:text-[60px]">
               <span className="whitespace-nowrap">ホームページ</span>
               <br className="sm:hidden" />
