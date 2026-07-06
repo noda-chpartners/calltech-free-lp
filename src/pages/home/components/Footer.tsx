@@ -1,10 +1,19 @@
-const navItems = [
+import { Link } from 'react-router-dom';
+
+type NavItem = {
+  label: string;
+  href: string;
+  internal?: boolean;
+};
+
+const navItems: NavItem[] = [
   { label: 'COMPANY', href: 'https://calltech.jp/company' },
   { label: 'SERVICE', href: 'https://calltech.jp/service' },
   { label: 'NEWS', href: 'https://calltech.jp/news' },
   { label: 'RECRUIT', href: 'https://recruit.calltech.jp/' },
   { label: 'CONTACT', href: 'https://calltech.jp/contact' },
   { label: 'PRIVACYPOLICY', href: 'https://calltech.jp/privacy-policy' },
+  { label: 'TERMS OF USE', href: '/terms', internal: true },
   { label: 'PRIVACYMARK', href: 'https://calltech.jp/privacymark' },
 ];
 
@@ -217,9 +226,15 @@ export default function Footer() {
           <ul className="footer-nav-list">
             {navItems.map((item) => (
               <li key={item.label}>
-                <a href={item.href} className="footer-nav-link" target="_blank" rel="noopener noreferrer">
-                  {item.label}
-                </a>
+                {item.internal ? (
+                  <Link to={item.href} className="footer-nav-link">
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a href={item.href} className="footer-nav-link" target="_blank" rel="noopener noreferrer">
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
