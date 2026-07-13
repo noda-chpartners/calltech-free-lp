@@ -136,7 +136,7 @@ export default function CaseSection() {
 
   return (
     <section
-      id="demo"
+      id="case"
       ref={ref}
       className={`demo-section transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
