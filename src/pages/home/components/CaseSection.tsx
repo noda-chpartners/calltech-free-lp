@@ -32,7 +32,7 @@ const demoSites: DemoSite[] = [
   },
   {
     category: '民泊',
-    title: 'パーティクル高砂',
+    title: 'パルティーレ高砂',
     url: 'https://partire-takasago-hotel.pages.dev/',
     image: '/images/works/site02.png',
   },
