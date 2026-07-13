@@ -480,7 +480,7 @@ export default function CaseSection() {
       </style>
 
       <div className="demo-inner">
-        <h3 className="demo-heading">作成事例</h3>
+        <h3 className="demo-heading">制作事例</h3>
         <p className="demo-lead">実際に制作したホームページの一部をご紹介します。</p>
 
         <div className="demo-category-tabs" aria-label="サイトのカテゴリ">

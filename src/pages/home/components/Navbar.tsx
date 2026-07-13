@@ -5,7 +5,7 @@ const navLinks = [
   { label: 'サービス内容', href: '#services' },
   { label: '費用', href: '#pricing' },
   { label: 'デモサイト', href: '#demo' },
-  { label: '作成事例', href: '#case' },
+  { label: '制作事例', href: '#case' },
   { label: '制作の流れ', href: '#process' },
   { label: 'よくある質問', href: '#faq' },
 ];
