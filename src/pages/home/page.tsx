@@ -5,6 +5,7 @@ import HeroSection from './components/HeroSection';
 import PricingSection from './components/PricingSection';
 import ServicesSection from './components/ServicesSection';
 import DemoSection from './components/DemoSection';
+import CaseSection from './components/CaseSection';
 import ProcessSection from './components/ProcessSection';
 import FAQSection from './components/FAQSection';
 import CtaBanner from './components/CtaBanner';
@@ -28,6 +29,7 @@ export default function Home() {
       <PricingSection />
       <ServicesSection />
       <DemoSection />
+      <CaseSection />
       <ProcessSection />
       <FAQSection />
       <CtaBanner />

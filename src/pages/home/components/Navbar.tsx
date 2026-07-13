@@ -5,6 +5,7 @@ const navLinks = [
   { label: 'サービス内容', href: '#services' },
   { label: '費用', href: '#pricing' },
   { label: 'デモサイト', href: '#demo' },
+  { label: '作成事例', href: '#case' },
   { label: '制作の流れ', href: '#process' },
   { label: 'よくある質問', href: '#faq' },
 ];
@@ -34,7 +35,7 @@ export default function Navbar() {
         scrolled ? 'shadow-[0_6px_18px_rgba(15,23,42,0.065)]' : 'shadow-[0_2px_8px_rgba(15,23,42,0.03)]'
       }`}
     >
-      <div className="mx-auto flex h-[68px] w-full max-w-[1280px] items-center justify-between px-5 md:h-[76px] md:px-8 xl:px-0">
+      <div className="mx-auto flex h-[68px] w-full max-w-[1280px] items-center justify-between px-5 md:h-[76px] md:px-8 xl:px-8">
         <Logo />
 
         <div className="hidden items-center gap-6 lg:flex">

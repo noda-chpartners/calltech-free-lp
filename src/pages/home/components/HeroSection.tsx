@@ -35,7 +35,7 @@ export default function HeroSection() {
         <div className="absolute inset-y-0 right-[34%] hidden w-[28%] bg-gradient-to-r from-white via-white/90 to-transparent lg:block" />
       </div>
 
-      <div className="relative mx-auto flex min-h-[572px] w-full max-w-[1280px] items-center px-5 pb-8 pt-7 md:min-h-[614px] md:px-8 md:py-12 lg:py-0 xl:px-0">
+      <div className="relative mx-auto flex min-h-[572px] w-full max-w-[1280px] items-center px-5 pb-8 pt-7 md:min-h-[614px] md:px-8 md:py-12 lg:py-0 xl:px-8">
         <div className="grid w-full items-center md:gap-10 lg:grid-cols-[minmax(0,650px)_1fr]">
           <div className="max-w-[650px]">
             <h1 className="mb-5 text-[38px] font-black leading-[1.16] tracking-normal text-gray-950 sm:text-[42px] md:mb-7 md:text-[56px] lg:whitespace-nowrap xl:text-[60px]">
@@ -51,11 +51,11 @@ export default function HeroSection() {
             </p>
 
             <p className="mb-7 text-[14px] font-bold leading-[1.9] text-gray-900 md:mb-9 md:text-base">
-              弊社取り扱いの対象サービスをご契約のお客様は、
+              初期費用・月額費用・サーバー費用、すべて0円。
               <br />
-              初期費用・月額費用・サーバー費用すべて0円。
+              スマホ対応、お問い合わせフォーム、地図表示など、
               <br />
-              必要な機能をそろえたホームページを、
+              集客に必要な機能をそろえたホームページを、
               <br />
               無料でご提供します。
             </p>
