@@ -10,11 +10,12 @@ type DemoCategory =
   | '整体・マッサージ'
   | '法人・企業サイト'
   | 'ネイルサロン'
-  | '雀荘';
+  | '雀荘'
+  | '飲食';
 
-type DemoFilter = 'すべて' | '宿泊' | '美容・健康' | '店舗・サービス' | '法人・専門業種';
+type DemoFilter = 'すべて' | '宿泊' | '美容・健康' | '店舗・サービス' | '法人・専門業種' | '飲食';
 
-type TagColor = 'blue' | 'sky' | 'green' | 'purple';
+type TagColor = 'blue' | 'sky' | 'green' | 'purple' | 'orange';
 
 type DemoSite = {
   category: DemoCategory;
@@ -78,15 +79,22 @@ const demoSites: DemoSite[] = [
     url: 'https://m-reach.pages.dev/',
     image: '/images/works/site09.png',
   },
+  {
+    category: '飲食',
+    title: 'まぜらーくらうん',
+    url: 'https://mazera-clown.pages.dev/',
+    image: '/images/works/site010.png',
+  },
 ];
 
-const filters: DemoFilter[] = ['すべて', '宿泊', '美容・健康', '店舗・サービス', '法人・専門業種'];
+const filters: DemoFilter[] = ['すべて', '宿泊', '美容・健康', '店舗・サービス', '法人・専門業種', '飲食'];
 
 const filterGroupMap: Record<Exclude<DemoFilter, 'すべて'>, DemoCategory[]> = {
   宿泊: ['旅館', '民泊', '貸切宿・ゲストハウス'],
   '美容・健康': ['ジム・フィットネス', '整体・マッサージ', 'ネイルサロン'],
   '店舗・サービス': ['雀荘'],
   '法人・専門業種': ['自動車販売・整備', '法人・企業サイト'],
+  '飲食': ['飲食'],
 };
 
 const groupTagColorMap: Record<Exclude<DemoFilter, 'すべて'>, TagColor> = {
@@ -94,6 +102,7 @@ const groupTagColorMap: Record<Exclude<DemoFilter, 'すべて'>, TagColor> = {
   '美容・健康': 'green',
   '店舗・サービス': 'sky',
   '法人・専門業種': 'purple',
+  飲食: 'orange',
 };
 
 const getTagColor = (category: DemoCategory): TagColor => {
@@ -114,6 +123,7 @@ const visualToneMap: Record<DemoCategory, string> = {
   '法人・企業サイト': 'demo-visual-specialty',
   ネイルサロン: 'demo-visual-beauty',
   雀荘: 'demo-visual-service',
+  飲食: 'demo-visual-food',
 };
 
 export default function CaseSection() {
@@ -389,6 +399,10 @@ export default function CaseSection() {
 
           .demo-tag-purple {
             background: #7c6ad6;
+          }
+
+          .demo-tag-orange {
+            background: #e67e22;
           }
 
           .demo-title {
